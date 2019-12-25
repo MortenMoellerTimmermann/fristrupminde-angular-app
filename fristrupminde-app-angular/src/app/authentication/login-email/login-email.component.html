@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="login-box">
+    <h1>Login</h1>
+    <div class="input-container">
+      <input class="self-input" placeholder="Brugernavn" [(ngModel)]="user.username" />
+      <input
+        class="self-input"
+        type="password"
+        placeholder="Password"
+        [(ngModel)]="user.password"
+      />
+    </div>
+    <div class="button-container">
+      <button (click)="authenticate()">Login</button>
+      <p>- eller -</p>
+      <h3 (click)="register()">Register</h3>
+    </div>
+  </div>
+</div>

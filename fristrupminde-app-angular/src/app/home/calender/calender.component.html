@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="calender-container">
+    <div class="calender-controls">
+      <h4 class="controls" (click)="getPreviousMonth()">
+        Forrige måned
+      </h4>
+      <h4>{{ displayedMonthString }} {{ displayedYearString }}</h4>
+      <h4 class="controls" (click)="getNextMonth()">
+        Næste måned
+      </h4>
+    </div>
+    <div class="calender-header">
+      <p>M</p>
+      <p>T</p>
+      <p>O</p>
+      <p>T</p>
+      <p>F</p>
+      <p>L</p>
+      <p>S</p>
+    </div>
+    <div class="calender-body">
+      <div class="calender-week" *ngFor="let week of weeks">
+        <p
+          *ngFor="let date of week"
+          (click)="selectDate(date)"
+          [className]="
+            selectedDate != null &&
+            date.date.getMonth() == selectedDate.date.getMonth() &&
+            date.date.getDate() == selectedDate.date.getDate()
+              ? 'selected-date'
+              : date.otherMonth
+              ? 'other-month'
+              : 'current-month'
+          "
+        >
+          {{ date.getDate() }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
