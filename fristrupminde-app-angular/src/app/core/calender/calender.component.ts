@@ -23,6 +23,7 @@ export class CalenderComponent implements OnInit {
   ngOnInit() {
     this.setupMonthString();
     this.setupDates();
+    this.onSelectDateEvent.emit(new Date());
   }
 
   setupDates() {

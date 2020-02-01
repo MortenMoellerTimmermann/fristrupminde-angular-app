@@ -1,19 +1,6 @@
 <div class="main-container">
   <app-navbar> </app-navbar>
   <div class="container">
-    <div class="calender-container">
-      <app-calender (onSelectDateEvent)="dateSelected($event)"> </app-calender>
-    </div>
-    <div class="tasks-container">
-      <h2>Dine opgaver {{ selectedDateString }}</h2>
-      <div class="tasks-inner-container">
-        <app-task> </app-task>
-        <app-task> </app-task>
-        <app-task> </app-task>
-        <app-task> </app-task>
-        <app-task> </app-task>
-        <app-task> </app-task>
-      </div>
-    </div>
+    <router-outlet></router-outlet>
   </div>
 </div>

@@ -20,9 +20,12 @@ import { RegisterComponent } from "./authentication/register/register.component"
 import { SignInMethodComponent } from "./authentication/sign-in-method/sign-in-method.component";
 import { LoginEmailComponent } from "./authentication/login-email/login-email.component";
 import { HomeComponent } from "./home/home.component";
-import { NavbarComponent } from "./home/navbar/navbar.component";
-import { CalenderComponent } from './home/calender/calender.component';
-import { TaskComponent } from './home/task/task.component';
+import { NavbarComponent } from "./core/navbar/navbar.component";
+import { CalenderComponent } from "./core/calender/calender.component";
+import { TaskObjectComponent } from "./task-container/task-object/task-object.component";
+import { YourTasksComponent } from "./task-container/your-tasks/your-tasks.component";
+import { TaskContainerComponent } from "./task-container/task-container.component";
+import { RemarksContainerComponent } from "./remarks-container/remarks-container.component";
 
 @NgModule({
   declarations: [
@@ -33,7 +36,10 @@ import { TaskComponent } from './home/task/task.component';
     HomeComponent,
     NavbarComponent,
     CalenderComponent,
-    TaskComponent
+    TaskObjectComponent,
+    YourTasksComponent,
+    TaskContainerComponent,
+    RemarksContainerComponent
   ],
   imports: [
     BrowserModule,

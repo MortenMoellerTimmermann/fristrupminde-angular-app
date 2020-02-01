@@ -1,0 +1,12 @@
+<div>
+  <div class="calender-container">
+    <app-calender (onSelectDateEvent)="dateSelected($event)"> </app-calender>
+  </div>
+  <div class="tasks-presenter-container">
+    <app-your-tasks
+      *ngIf="currentPath === taskPaths.your_tasks"
+      [dateString]="selectedDateString"
+    >
+    </app-your-tasks>
+  </div>
+</div>
