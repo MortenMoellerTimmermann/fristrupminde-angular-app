@@ -37,6 +37,8 @@ export class CalenderComponent implements OnInit {
     this.displayedYear = this.currentYear;
     currentDay = new Date(this.currentYear, this.currentMonth, 1);
 
+    //Sets the current date to be selected
+    this.selectedDate = new CalenderDate(new Date(), false);
     this.getDatesForMonth(currentDay);
   }
 
