@@ -13,8 +13,6 @@ import {
 } from "angularfire2/firestore";
 import { AngularFireAuth } from "angularfire2/auth";
 import { environment } from "../environments/environment";
-import { ElModule } from "element-angular";
-import "element-angular/theme/index.css";
 
 import { RegisterComponent } from "./authentication/register/register.component";
 import { SignInMethodComponent } from "./authentication/sign-in-method/sign-in-method.component";
@@ -26,6 +24,7 @@ import { TaskObjectComponent } from "./task-container/task-object/task-object.co
 import { YourTasksComponent } from "./task-container/your-tasks/your-tasks.component";
 import { TaskContainerComponent } from "./task-container/task-container.component";
 import { RemarksContainerComponent } from "./remarks-container/remarks-container.component";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -43,12 +42,12 @@ import { RemarksContainerComponent } from "./remarks-container/remarks-container
   ],
   imports: [
     BrowserModule,
-    ElModule.forRoot(),
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    BrowserAnimationsModule
   ],
   providers: [AngularFireAuth, AngularFirestore, AuthGuardService],
   bootstrap: [AppComponent]

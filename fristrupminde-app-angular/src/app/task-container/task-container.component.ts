@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-task-container",
@@ -12,7 +12,10 @@ export class TaskContainerComponent implements OnInit {
   selectedDate: Date;
   selectedDateString: string;
 
-  constructor(router: Router) {
+  constructor(router: Router, private actRoute: ActivatedRoute) {
+    this.actRoute.paramMap.subscribe(params => {
+      console.log(params.get("id"));
+    });
     if (router.url.includes("your-tasks")) {
       this.currentPath = taskPaths.your_tasks;
     } else if (router.url.includes("available-tasks")) {
