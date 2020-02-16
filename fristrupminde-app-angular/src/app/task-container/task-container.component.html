@@ -3,10 +3,36 @@
     <app-calender (onSelectDateEvent)="dateSelected($event)"> </app-calender>
   </div>
   <div class="tasks-presenter-container">
-    <app-your-tasks
-      *ngIf="currentPath === taskPaths.your_tasks"
-      [dateString]="selectedDateString"
-    >
-    </app-your-tasks>
+    <div class="tasks-container">
+      <div class="tasks-header">
+        <h2>{{ dateStringPrefix() + " " + selectedDateString }}</h2>
+        <div class="links">
+          <a
+            routerLink="your-tasks"
+            (click)="changeRoute(taskPaths.your_tasks)"
+          >
+            Dine opgaver
+          </a>
+          <a
+            routerLink="available-tasks"
+            (click)="changeRoute(taskPaths.available_tasks)"
+          >
+            Ledige opgaver
+          </a>
+        </div>
+      </div>
+      <div class="tasks-inner-container">
+        <app-your-tasks
+          *ngIf="currentPath === taskPaths.your_tasks"
+          [date]="selectedDate"
+        >
+        </app-your-tasks>
+        <app-available-tasks
+          *ngIf="currentPath === taskPaths.available_tasks"
+          [date]="selectedDate"
+        >
+        </app-available-tasks>
+      </div>
+    </div>
   </div>
 </div>

@@ -12,10 +12,7 @@ export class TaskContainerComponent implements OnInit {
   selectedDate: Date;
   selectedDateString: string;
 
-  constructor(router: Router, private actRoute: ActivatedRoute) {
-    this.actRoute.paramMap.subscribe(params => {
-      console.log(params.get("id"));
-    });
+  constructor(router: Router) {
     if (router.url.includes("your-tasks")) {
       this.currentPath = taskPaths.your_tasks;
     } else if (router.url.includes("available-tasks")) {
@@ -29,6 +26,18 @@ export class TaskContainerComponent implements OnInit {
     this.selectedDate = date;
     var splitted = date.toLocaleString().split(" ");
     this.selectedDateString = "den " + splitted[0];
+  }
+
+  dateStringPrefix(): string {
+    if (this.currentPath === taskPaths.your_tasks) {
+      return "Dine opgaver";
+    } else if (this.currentPath === taskPaths.available_tasks) {
+      return "Ledige opgaver";
+    }
+  }
+
+  changeRoute(path: taskPaths) {
+    this.currentPath = path;
   }
 }
 

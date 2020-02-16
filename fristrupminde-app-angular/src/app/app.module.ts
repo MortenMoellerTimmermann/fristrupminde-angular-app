@@ -25,6 +25,7 @@ import { YourTasksComponent } from "./task-container/your-tasks/your-tasks.compo
 import { TaskContainerComponent } from "./task-container/task-container.component";
 import { RemarksContainerComponent } from "./remarks-container/remarks-container.component";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AvailableTasksComponent } from './task-container/available-tasks/available-tasks.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     TaskObjectComponent,
     YourTasksComponent,
     TaskContainerComponent,
-    RemarksContainerComponent
+    RemarksContainerComponent,
+    AvailableTasksComponent
   ],
   imports: [
     BrowserModule,

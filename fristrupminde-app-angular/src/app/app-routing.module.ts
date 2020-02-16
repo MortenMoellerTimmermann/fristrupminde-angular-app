@@ -21,7 +21,7 @@ const routes: Routes = [
         children: [
           { path: "", redirectTo: "your-tasks", pathMatch: "full" },
           { path: "your-tasks", component: YourTasksComponent },
-          { path: "your-tasks/:id", component: YourTasksComponent }
+          { path: "available-tasks", component: RegisterComponent }
         ]
       },
       { path: "remarks", component: RemarksContainerComponent }

@@ -6,7 +6,7 @@ import { Component, OnInit, Input } from "@angular/core";
   styleUrls: ["./your-tasks.component.scss"]
 })
 export class YourTasksComponent implements OnInit {
-  @Input() dateString: string;
+  @Input() date: Date;
 
   constructor() {}
 
