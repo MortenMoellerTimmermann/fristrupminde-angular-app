@@ -1,5 +1,5 @@
 export default interface ITask {
-  projectTaskID?: Number;
-  description: string;
-  title: string;
+  ID?: Number;
+  Description: string;
+  Title: string;
 }

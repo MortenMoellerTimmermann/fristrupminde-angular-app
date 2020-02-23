@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
   }
 
   addTask() {
-    let newTask: ITask = { description: "hej hej", title: "goddav" };
+    let newTask: ITask = { Description: "hej hej", Title: "goddav" };
     this.taskService.addTask(newTask).subscribe();
   }
 
