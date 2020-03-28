@@ -1,5 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import CalenderDate from "./calenderDate";
+import ITask from "../../interfaces/ITask";
 
 @Component({
   selector: "app-calender",
@@ -7,6 +8,7 @@ import CalenderDate from "./calenderDate";
   styleUrls: ["./calender.component.scss"]
 })
 export class CalenderComponent implements OnInit {
+  @Input() tasks: Array<ITask>;
   @Output() onSelectDateEvent: EventEmitter<Date> = new EventEmitter();
   selectedDate: CalenderDate;
   weeks: Array<Array<CalenderDate>>;
@@ -38,7 +40,11 @@ export class CalenderComponent implements OnInit {
     currentDay = new Date(this.currentYear, this.currentMonth, 1);
 
     //Sets the current date to be selected
-    this.selectedDate = new CalenderDate(new Date(), false);
+    this.selectedDate = new CalenderDate(
+      new Date(),
+      false,
+      this.getAmountOfTasksForDate(new Date())
+    );
     this.getDatesForMonth(currentDay);
   }
 
@@ -57,7 +63,13 @@ export class CalenderComponent implements OnInit {
     }
     //The dates are in the wrong order, reverse the array
     for (var i = tempDatesArray.length - 1; i >= 0; i--) {
-      this.weeksDates.push(new CalenderDate(tempDatesArray[i], true));
+      this.weeksDates.push(
+        new CalenderDate(
+          tempDatesArray[i],
+          true,
+          this.getAmountOfTasksForDate(tempDatesArray[i])
+        )
+      );
     }
   }
 
@@ -65,7 +77,13 @@ export class CalenderComponent implements OnInit {
     var currentDay = new Date(endDate);
     while (currentDay.getDay() != 0) {
       var dateToAdd = new Date(currentDay.setDate(currentDay.getDate() + 1));
-      this.weeksDates.push(new CalenderDate(dateToAdd, true));
+      this.weeksDates.push(
+        new CalenderDate(
+          dateToAdd,
+          true,
+          this.getAmountOfTasksForDate(dateToAdd)
+        )
+      );
     }
   }
 
@@ -75,6 +93,8 @@ export class CalenderComponent implements OnInit {
     this.displayedMonthString = this.monthsString[firstDateInMonth.getMonth()];
     if (firstDateInMonth.getFullYear() != this.currentYear) {
       this.displayedYearString = firstDateInMonth.getFullYear().toString();
+    } else {
+      this.displayedYearString = "";
     }
 
     //Pre setup
@@ -84,7 +104,13 @@ export class CalenderComponent implements OnInit {
     var dateToAdd;
     while (this.displayedMonth == currentDay.getMonth()) {
       dateToAdd = new Date(currentDay);
-      this.weeksDates.push(new CalenderDate(dateToAdd, false));
+      this.weeksDates.push(
+        new CalenderDate(
+          dateToAdd,
+          false,
+          this.getAmountOfTasksForDate(dateToAdd)
+        )
+      );
       if (currentDay.getDay() == 0) {
         this.weeks.push(this.weeksDates);
         this.weeksDates = new Array();
@@ -139,14 +165,34 @@ export class CalenderComponent implements OnInit {
       weekDates = this.weeks[i];
       for (var j = 0; j < weekDates.length; j++) {
         currentDate = weekDates[j];
-        if (
-          currentDate.date.getMonth() == selectedDate.date.getMonth() &&
-          currentDate.date.getDate() == selectedDate.date.getDate()
-        ) {
+        if (currentDate.date.isSameDateAs(selectedDate.date)) {
           return currentDate;
         }
       }
     }
+  }
+
+  checkIfSameDate(calenderDate: CalenderDate): Boolean {
+    if (
+      this.selectedDate != null &&
+      calenderDate.date.getMonth() == this.selectedDate.date.getMonth() &&
+      calenderDate.date.getDate() == this.selectedDate.date.getDate()
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  getAmountOfTasksForDate(date: Date): Array<ITask> {
+    var temp: Array<ITask> = new Array();
+    this.tasks.forEach(task => {
+      let taskDate: Date = new Date(task.dueDate);
+      if (date.isSameDateAs(taskDate)) {
+        temp.push(task);
+      }
+    });
+    return temp;
   }
 
   setupMonthString() {

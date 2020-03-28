@@ -38,27 +38,41 @@
   .calender-body {
     padding: 0px 10px;
     .calender-week {
-      p {
-        margin: 10px 0px;
-        border-radius: 20px;
-        text-align: center;
+      div {
         display: inline-block;
         width: calc(100% / 7);
+        margin: 10px 0px;
+        p {
+          margin: 0px;
+          text-align: center;
+        }
+        .date {
+          margin: 0px;
+          height: 50%;
+          width: 100%;
+        }
+        .dots {
+          margin: 0px;
+          height: 50%;
+          width: 100%;
+        }
         &:hover {
           cursor: pointer;
           font-weight: bold;
         }
       }
       .other-month {
-        color: #989898;
+        color: #999;
       }
       .current-month {
-        color: #222222;
+        color: #222;
       }
       .selected-date {
-        color: #376dbd;
+        .date {
+          color: rgb(50, 50, 235);
+          text-decoration: underline;
+        }
         font-weight: bold;
-        text-decoration: underline;
       }
     }
   }

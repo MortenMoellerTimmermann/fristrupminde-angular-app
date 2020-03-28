@@ -1,6 +1,11 @@
 <div>
   <div class="calender-container">
-    <app-calender (onSelectDateEvent)="dateSelected($event)"> </app-calender>
+    <app-calender
+      *ngIf="tasks"
+      [tasks]="tasks"
+      (onSelectDateEvent)="dateSelected($event)"
+    >
+    </app-calender>
   </div>
   <div class="tasks-presenter-container">
     <div class="tasks-container">

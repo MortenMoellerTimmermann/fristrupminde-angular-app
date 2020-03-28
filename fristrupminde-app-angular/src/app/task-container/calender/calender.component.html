@@ -20,21 +20,26 @@
     </div>
     <div class="calender-body">
       <div class="calender-week" *ngFor="let week of weeks">
-        <p
-          *ngFor="let date of week"
+        <div
+          *ngFor="let date of week; let i = index"
           (click)="selectDate(date)"
           [className]="
-            selectedDate != null &&
-            date.date.getMonth() == selectedDate.date.getMonth() &&
-            date.date.getDate() == selectedDate.date.getDate()
+            checkIfSameDate(date)
               ? 'selected-date'
               : date.otherMonth
               ? 'other-month'
               : 'current-month'
           "
         >
-          {{ date.getDate() }}
-        </p>
+          <div class="date">
+            <p>
+              {{ date.getDate() }}
+            </p>
+          </div>
+          <div class="dots">
+            <p>{{ date.writeAmountOfTasksDots() }}</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>

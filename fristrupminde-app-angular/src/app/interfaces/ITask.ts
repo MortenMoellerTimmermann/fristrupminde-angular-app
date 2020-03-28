@@ -1,5 +1,7 @@
 export default interface ITask {
-  ID?: Number;
-  Description: string;
-  Title: string;
+  id?: Number;
+  description: string;
+  title: string;
+  created: Date;
+  dueDate: Date;
 }

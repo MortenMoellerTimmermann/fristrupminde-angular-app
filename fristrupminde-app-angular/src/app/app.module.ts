@@ -19,13 +19,14 @@ import { SignInMethodComponent } from "./authentication/sign-in-method/sign-in-m
 import { LoginEmailComponent } from "./authentication/login-email/login-email.component";
 import { HomeComponent } from "./home/home.component";
 import { NavbarComponent } from "./core/navbar/navbar.component";
-import { CalenderComponent } from "./core/calender/calender.component";
+import { CalenderComponent } from "./task-container/calender/calender.component";
 import { TaskObjectComponent } from "./task-container/task-object/task-object.component";
 import { YourTasksComponent } from "./task-container/your-tasks/your-tasks.component";
 import { TaskContainerComponent } from "./task-container/task-container.component";
 import { RemarksContainerComponent } from "./remarks-container/remarks-container.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AvailableTasksComponent } from "./task-container/available-tasks/available-tasks.component";
+import "./prototypes.ts";
 
 @NgModule({
   declarations: [
