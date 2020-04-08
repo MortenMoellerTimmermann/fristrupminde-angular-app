@@ -13,14 +13,10 @@
     width: 100%;
     height: calc(100vh - 80px);
     .tasks-header {
-      height: 80px;
+      float: right;
       padding-top: 20px;
       padding-left: 20px;
-      h2 {
-        float: left;
-      }
       .links {
-        float: right;
         padding-top: 5px;
         padding-right: 30px;
         a {
@@ -36,8 +32,9 @@
       }
     }
     .tasks-inner-container {
-      height: calc(100vh - 160px);
-      overflow-y: scroll;
+      width: 100%;
+      height: calc(100vh - 80px);
+      overflow-y: hidden;
     }
   }
 }

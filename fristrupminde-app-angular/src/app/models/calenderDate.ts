@@ -1,4 +1,4 @@
-import ITask from "../../interfaces/ITask";
+import ITask from "../interfaces/ITask";
 
 export default class CalenderDate {
   date: Date;
@@ -14,8 +14,16 @@ export default class CalenderDate {
     return this.date.getDate().toString();
   }
 
+  getDateObject(): Date {
+    return this.date;
+  }
+
   getAmountOfTasks(): number {
     return this.tasksForDate.length;
+  }
+
+  getTasks(): Array<ITask> {
+    return this.tasksForDate;
   }
 
   writeAmountOfTasksDots(): string {

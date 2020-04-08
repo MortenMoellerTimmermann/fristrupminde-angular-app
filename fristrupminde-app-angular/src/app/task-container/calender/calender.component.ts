@@ -1,15 +1,15 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import CalenderDate from "./calenderDate";
+import CalenderDate from "../../models/calenderDate";
 import ITask from "../../interfaces/ITask";
 
 @Component({
   selector: "app-calender",
   templateUrl: "./calender.component.html",
-  styleUrls: ["./calender.component.scss"]
+  styleUrls: ["./calender.component.scss"],
 })
 export class CalenderComponent implements OnInit {
   @Input() tasks: Array<ITask>;
-  @Output() onSelectDateEvent: EventEmitter<Date> = new EventEmitter();
+  @Output() onSelectDateEvent: EventEmitter<CalenderDate> = new EventEmitter();
   selectedDate: CalenderDate;
   weeks: Array<Array<CalenderDate>>;
   weeksDates: Array<CalenderDate>;
@@ -25,12 +25,11 @@ export class CalenderComponent implements OnInit {
   ngOnInit() {
     this.setupMonthString();
     this.setupDates();
-    this.onSelectDateEvent.emit(new Date());
+    this.onSelectDateEvent.emit(this.selectedDate);
   }
 
   setupDates() {
     var currentDay: Date;
-
     currentDay = new Date();
 
     this.currentMonth = currentDay.getMonth();
@@ -155,7 +154,7 @@ export class CalenderComponent implements OnInit {
     } else {
       this.selectedDate = selectedDate;
     }
-    this.onSelectDateEvent.emit(this.selectedDate.date);
+    this.onSelectDateEvent.emit(this.selectedDate);
   }
 
   findOtherMonthSelectedDate(selectedDate: CalenderDate): CalenderDate {
@@ -186,7 +185,7 @@ export class CalenderComponent implements OnInit {
 
   getAmountOfTasksForDate(date: Date): Array<ITask> {
     var temp: Array<ITask> = new Array();
-    this.tasks.forEach(task => {
+    this.tasks.forEach((task) => {
       let taskDate: Date = new Date(task.dueDate);
       if (date.isSameDateAs(taskDate)) {
         temp.push(task);

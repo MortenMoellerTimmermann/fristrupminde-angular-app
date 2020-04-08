@@ -10,7 +10,6 @@
   <div class="tasks-presenter-container">
     <div class="tasks-container">
       <div class="tasks-header">
-        <h2>{{ dateStringPrefix() + " " + selectedDateString }}</h2>
         <div class="links">
           <a
             routerLink="your-tasks"
@@ -30,6 +29,7 @@
         <app-your-tasks
           *ngIf="currentPath === taskPaths.your_tasks"
           [date]="selectedDate"
+          [tasks]="currentDateTasks"
         >
         </app-your-tasks>
         <app-available-tasks
@@ -41,3 +41,9 @@
     </div>
   </div>
 </div>
+
+<app-modal *ngIf="openModal">
+  <div head><h2>header</h2></div>
+  <div body><h2>body</h2></div>
+  <div footer><h2>footer</h2></div>
+</app-modal>

@@ -27,6 +27,7 @@ import { RemarksContainerComponent } from "./remarks-container/remarks-container
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AvailableTasksComponent } from "./task-container/available-tasks/available-tasks.component";
 import "./prototypes.ts";
+import { ModalComponent } from './core/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import "./prototypes.ts";
     YourTasksComponent,
     TaskContainerComponent,
     RemarksContainerComponent,
-    AvailableTasksComponent
+    AvailableTasksComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,

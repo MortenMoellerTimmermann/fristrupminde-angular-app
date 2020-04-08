@@ -1,19 +1,23 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { TaskService } from "../services/tasks/task.service";
 import ITask from "../interfaces/ITask";
+import CalenderDate from "../models/calenderDate";
 
 @Component({
   selector: "app-task-container",
   templateUrl: "./task-container.component.html",
-  styleUrls: ["./task-container.component.scss"]
+  styleUrls: ["./task-container.component.scss"],
 })
-export class TaskContainerComponent implements OnInit {
+export class TaskContainerComponent implements OnInit, OnDestroy {
   currentPath: taskPaths;
   taskPaths = taskPaths;
   selectedDate: Date;
-  selectedDateString: string;
+  selectedDateString: string = "";
   tasks: Array<ITask>;
+  taskSubscription: any;
+  currentDateTasks: Array<ITask>;
+  openModal: boolean = false;
 
   constructor(router: Router, private taskService: TaskService) {
     if (router.url.includes("your-tasks")) {
@@ -27,22 +31,20 @@ export class TaskContainerComponent implements OnInit {
     this.getTasks();
   }
 
+  ngOnDestroy() {
+    this.taskSubscription.unsubscribe();
+  }
+
   getTasks() {
-    this.taskService.getTasks().subscribe(data => (this.tasks = data));
+    this.taskSubscription = this.taskService.getTasks().subscribe(
+      (data) => (this.tasks = data),
+      (error) => (this.tasks = Array<ITask>())
+    );
   }
 
-  dateSelected(date: Date) {
-    this.selectedDate = date;
-    var splitted = date.toLocaleString().split(" ");
-    this.selectedDateString = "den " + splitted[0];
-  }
-
-  dateStringPrefix(): string {
-    if (this.currentPath === taskPaths.your_tasks) {
-      return "Dine opgaver";
-    } else if (this.currentPath === taskPaths.available_tasks) {
-      return "Ledige opgaver";
-    }
+  dateSelected(date: CalenderDate) {
+    this.currentDateTasks = date.getTasks();
+    this.selectedDate = date.getDateObject();
   }
 
   changeRoute(path: taskPaths) {
@@ -52,5 +54,5 @@ export class TaskContainerComponent implements OnInit {
 
 enum taskPaths {
   your_tasks,
-  available_tasks
+  available_tasks,
 }
