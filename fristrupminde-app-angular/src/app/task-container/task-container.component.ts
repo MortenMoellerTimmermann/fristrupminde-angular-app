@@ -17,7 +17,7 @@ export class TaskContainerComponent implements OnInit, OnDestroy {
   tasks: Array<ITask>;
   taskSubscription: any;
   currentDateTasks: Array<ITask>;
-  openModal: boolean = false;
+  openModal: boolean = true;
 
   constructor(router: Router, private taskService: TaskService) {
     if (router.url.includes("your-tasks")) {
@@ -49,6 +49,10 @@ export class TaskContainerComponent implements OnInit, OnDestroy {
 
   changeRoute(path: taskPaths) {
     this.currentPath = path;
+  }
+
+  onCloseModal(): void {
+    this.openModal = false;
   }
 }
 

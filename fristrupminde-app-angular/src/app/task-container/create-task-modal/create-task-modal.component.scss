@@ -1,0 +1,60 @@
+.container {
+  .header {
+    background-color: #376dbd;
+    h2 {
+      padding: 20px;
+      margin: 0px;
+      color: white;
+    }
+  }
+  .body {
+    height: 550px;
+    overflow-x: hidden;
+    form {
+      div {
+        width: 100%;
+        margin: 25px 20px;
+        label {
+          font-size: 16px;
+          display: block;
+        }
+        .input-type {
+          margin-top: 10px;
+          display: block;
+          width: calc(100% - 50px);
+        }
+        input {
+          height: 35px;
+        }
+        textarea {
+          resize: none;
+        }
+        .description {
+          height: 150px;
+        }
+        .duedate {
+          float: left;
+          width: calc(100% - 150px);
+        }
+      }
+    }
+  }
+  .footer {
+    background-color: #376dbd;
+    h2 {
+      margin: 0px;
+      padding: 10px;
+      color: white;
+      font-size: 18px;
+      text-align: center;
+      font-weight: bold;
+      &:hover {
+        cursor: pointer;
+      }
+      &:active {
+        color: #eee;
+        font-weight: 300;
+      }
+    }
+  }
+}

@@ -1,0 +1,68 @@
+<app-modal
+  class="container"
+  [openModal]="openModal"
+  (onCloseModalEvent)="onCloseModal($event)"
+>
+  <div head class="header"><h2>Opret opgave</h2></div>
+  <div body class="body">
+    <form [formGroup]="taskForm">
+      <div>
+        <label for="title">
+          Titel:
+        </label>
+        <input
+          id="title"
+          class="input-type title"
+          type="text"
+          formControlName="title"
+        />
+      </div>
+      <div>
+        <label for="description">
+          Beskrivelse:
+        </label>
+        <textarea
+          id="description"
+          class="input-type description"
+          type="text"
+          formControlName="description"
+        ></textarea>
+      </div>
+      <div>
+        <label for="duedate">
+          Slut dato:
+        </label>
+        <input
+          [matDatepicker]="picker"
+          id="duedate"
+          class="input-type duedate"
+          formControlName="duedate"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </div>
+      <div>
+        <label for="assignedTo">
+          Giv opgave til:
+        </label>
+        <input
+          matInput
+          [matAutocomplete]="auto"
+          id="assignedTo"
+          class="input-type assignedTo"
+          type="text"
+          formControlName="assignedTo"
+        />
+
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option *ngFor="let option of options" [value]="option">
+            {{ option }}
+          </mat-option>
+        </mat-autocomplete>
+      </div>
+    </form>
+  </div>
+  <div footer class="footer">
+    <h2 (click)="onSubmit(taskForm)">Opret</h2>
+  </div>
+</app-modal>

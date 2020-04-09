@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class ApiComponent {
   baseUrl: String;
@@ -12,5 +12,9 @@ export class ApiComponent {
 
   getTasks(): string {
     return this.baseUrl + "/getTasks";
+  }
+
+  postTasks(): string {
+    return this.baseUrl + "/postTask";
   }
 }

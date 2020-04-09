@@ -6,7 +6,7 @@ import { Observable, throwError } from "rxjs";
 import { retry, catchError } from "rxjs/operators";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class TaskService {
   constructor(private http: HttpClient, private api: ApiComponent) {}
@@ -17,8 +17,8 @@ export class TaskService {
       .pipe(catchError(this.handleError));
   }
 
-  addTask(task: ITask): Observable<any> {
-    return this.http.post<ITask>("https://localhost:5001/api/postTask", task);
+  createTask(task: ITask): Observable<any> {
+    return this.http.post<ITask>(this.api.postTasks(), task);
   }
 
   handleError(error) {

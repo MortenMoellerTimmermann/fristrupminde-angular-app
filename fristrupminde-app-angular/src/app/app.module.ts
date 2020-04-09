@@ -1,6 +1,5 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 
 import { AuthGuardService } from "./authentication/authguard";
@@ -9,7 +8,7 @@ import { AppComponent } from "./app.component";
 import { AngularFireModule } from "angularfire2";
 import {
   AngularFirestore,
-  AngularFirestoreModule
+  AngularFirestoreModule,
 } from "angularfire2/firestore";
 import { AngularFireAuth } from "angularfire2/auth";
 import { environment } from "../environments/environment";
@@ -27,7 +26,10 @@ import { RemarksContainerComponent } from "./remarks-container/remarks-container
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AvailableTasksComponent } from "./task-container/available-tasks/available-tasks.component";
 import "./prototypes.ts";
-import { ModalComponent } from './core/modal/modal.component';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ModalComponent } from "./core/modal/modal.component";
+import { CreateTaskModalComponent } from "./task-container/create-task-modal/create-task-modal.component";
+import { MaterialModuleModule } from "./material-module/material-module.module";
 
 @NgModule({
   declarations: [
@@ -43,18 +45,21 @@ import { ModalComponent } from './core/modal/modal.component';
     TaskContainerComponent,
     RemarksContainerComponent,
     AvailableTasksComponent,
-    ModalComponent
+    ModalComponent,
+    CreateTaskModalComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
+    MaterialModuleModule,
     HttpClientModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [AngularFireAuth, AngularFirestore, AuthGuardService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

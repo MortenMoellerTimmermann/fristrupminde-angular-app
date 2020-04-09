@@ -14,12 +14,18 @@
           <a
             routerLink="your-tasks"
             (click)="changeRoute(taskPaths.your_tasks)"
+            [ngClass]="{
+              'selected-path': currentPath === taskPaths.your_tasks
+            }"
           >
             Dine opgaver
           </a>
           <a
             routerLink="available-tasks"
             (click)="changeRoute(taskPaths.available_tasks)"
+            [ngClass]="{
+              'selected-path': currentPath === taskPaths.available_tasks
+            }"
           >
             Ledige opgaver
           </a>
@@ -42,8 +48,8 @@
   </div>
 </div>
 
-<app-modal *ngIf="openModal">
-  <div head><h2>header</h2></div>
-  <div body><h2>body</h2></div>
-  <div footer><h2>footer</h2></div>
-</app-modal>
+<app-create-task-modal
+  [openModal]="openModal"
+  (onCloseModalEvent)="onCloseModal($event)"
+>
+</app-create-task-modal>

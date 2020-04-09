@@ -1,7 +1,10 @@
-<div class="modal-fade">
+<div class="modal-fade" *ngIf="openModal">
   <div class="modal-content">
     <div class="modal-container">
       <div class="modal-header">
+        <span class="close-icon" aria-hidden="true" (click)="closeModal()">
+          &times;</span
+        >
         <ng-content select="[head]"> </ng-content>
       </div>
       <div class="modal-body">
