@@ -3,6 +3,7 @@
     <app-calender
       *ngIf="tasks"
       [tasks]="tasks"
+      [newTaskSubscription]="notifyCalenderObservable"
       (onSelectDateEvent)="dateSelected($event)"
     >
     </app-calender>
@@ -29,6 +30,9 @@
           >
             Ledige opgaver
           </a>
+          <a (click)="openCreateTaskModal()">
+            Opret opgave
+          </a>
         </div>
       </div>
       <div class="tasks-inner-container">
@@ -50,6 +54,7 @@
 
 <app-create-task-modal
   [openModal]="openModal"
+  (onAddTask)="addNewTask($event)"
   (onCloseModalEvent)="onCloseModal($event)"
 >
 </app-create-task-modal>

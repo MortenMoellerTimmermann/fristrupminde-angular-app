@@ -1,5 +1,13 @@
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  OnDestroy,
+} from "@angular/core";
 import CalenderDate from "../../models/calenderDate";
+import { Subject, VirtualTimeScheduler } from "rxjs";
 import ITask from "../../interfaces/ITask";
 
 @Component({
@@ -7,8 +15,9 @@ import ITask from "../../interfaces/ITask";
   templateUrl: "./calender.component.html",
   styleUrls: ["./calender.component.scss"],
 })
-export class CalenderComponent implements OnInit {
+export class CalenderComponent implements OnInit, OnDestroy {
   @Input() tasks: Array<ITask>;
+  @Input() newTaskSubscription: Subject<ITask>;
   @Output() onSelectDateEvent: EventEmitter<CalenderDate> = new EventEmitter();
   selectedDate: CalenderDate;
   weeks: Array<Array<CalenderDate>>;
@@ -26,6 +35,14 @@ export class CalenderComponent implements OnInit {
     this.setupMonthString();
     this.setupDates();
     this.onSelectDateEvent.emit(this.selectedDate);
+
+    this.newTaskSubscription.subscribe((newTask) => {
+      this.addNewTaskToCalender(newTask);
+    });
+  }
+
+  ngOnDestroy() {
+    this.newTaskSubscription.unsubscribe();
   }
 
   setupDates() {
@@ -192,6 +209,21 @@ export class CalenderComponent implements OnInit {
       }
     });
     return temp;
+  }
+
+  addNewTaskToCalender(itask: ITask): void {
+    this.weeks.forEach((weeks) => {
+      weeks.forEach((day) => {
+        if (day.date.isSameDateAs(itask.dueDate)) {
+          day.addNewTask(itask);
+          //Updates the view
+          if (day.date.isSameDateAs(this.selectedDate.date)) {
+            this.selectedDate = day;
+          }
+          this.onSelectDateEvent.emit(this.selectedDate);
+        }
+      });
+    });
   }
 
   setupMonthString() {

@@ -14,6 +14,10 @@ export default class CalenderDate {
     return this.date.getDate().toString();
   }
 
+  addNewTask(itask: ITask): void {
+    this.tasksForDate.push(itask);
+  }
+
   getDateObject(): Date {
     return this.date;
   }
@@ -29,10 +33,11 @@ export default class CalenderDate {
   writeAmountOfTasksDots(): string {
     let index: number = 0;
     let output: string = "";
-    this.tasksForDate.forEach(task => {
-      if (index <= 3) {
+    this.tasksForDate.forEach((task) => {
+      if (index < 3) {
         output += " . ";
       }
+      index += 1;
     });
     return output;
   }

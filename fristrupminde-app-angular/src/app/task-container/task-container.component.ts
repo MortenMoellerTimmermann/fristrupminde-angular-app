@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
+import { Subject } from "rxjs";
 import { TaskService } from "../services/tasks/task.service";
 import ITask from "../interfaces/ITask";
 import CalenderDate from "../models/calenderDate";
@@ -17,7 +18,8 @@ export class TaskContainerComponent implements OnInit, OnDestroy {
   tasks: Array<ITask>;
   taskSubscription: any;
   currentDateTasks: Array<ITask>;
-  openModal: boolean = true;
+  openModal: boolean = false;
+  notifyCalenderObservable: Subject<ITask> = new Subject();
 
   constructor(router: Router, private taskService: TaskService) {
     if (router.url.includes("your-tasks")) {
@@ -42,13 +44,23 @@ export class TaskContainerComponent implements OnInit, OnDestroy {
     );
   }
 
+  addNewTask(itask: ITask): void {
+    this.tasks.push(itask);
+    this.notifyCalenderObservable.next(itask);
+  }
+
   dateSelected(date: CalenderDate) {
     this.currentDateTasks = date.getTasks();
     this.selectedDate = date.getDateObject();
+    console.log(this.currentDateTasks);
   }
 
   changeRoute(path: taskPaths) {
     this.currentPath = path;
+  }
+
+  openCreateTaskModal(): void {
+    this.openModal = true;
   }
 
   onCloseModal(): void {

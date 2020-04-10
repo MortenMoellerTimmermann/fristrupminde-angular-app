@@ -1,4 +1,4 @@
 <div class="tasks-inner-container">
   <h2>{{ getDateString() }}</h2>
-  <app-task-object *ngFor="let task of tasks"> </app-task-object>
+  <app-task-object *ngFor="let task of tasks" [task]="task"> </app-task-object>
 </div>

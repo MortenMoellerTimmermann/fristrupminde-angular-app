@@ -8,17 +8,19 @@
     }
   }
   .body {
-    height: 550px;
+    height: 580px;
     overflow-x: hidden;
     form {
       div {
         width: 100%;
-        margin: 25px 20px;
+        margin: 30px 20px;
         label {
           font-size: 16px;
           display: block;
         }
         .input-type {
+          padding: 5px;
+          font-size: 16px;
           margin-top: 10px;
           display: block;
           width: calc(100% - 50px);
@@ -34,7 +36,7 @@
         }
         .duedate {
           float: left;
-          width: calc(100% - 150px);
+          width: 30%;
         }
       }
     }

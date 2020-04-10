@@ -38,7 +38,11 @@
           class="input-type duedate"
           formControlName="duedate"
         />
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker-toggle
+          class="datepicker-toggle"
+          matSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </div>
       <div>
