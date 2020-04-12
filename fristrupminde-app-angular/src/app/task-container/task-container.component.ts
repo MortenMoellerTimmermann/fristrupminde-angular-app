@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { Subject } from "rxjs";
-import { TaskService } from "../services/tasks/task.service";
-import ITask from "../interfaces/ITask";
-import CalenderDate from "../models/calenderDate";
+import { TaskService } from "./services/tasks/task.service";
+import ITask from "./interfaces/ITask";
+import CalenderDate from "./models/calenderDate";
 
 @Component({
   selector: "app-task-container",

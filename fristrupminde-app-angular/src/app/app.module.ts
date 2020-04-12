@@ -13,44 +13,30 @@ import {
 import { AngularFireAuth } from "angularfire2/auth";
 import { environment } from "../environments/environment";
 
-import { RegisterComponent } from "./authentication/register/register.component";
-import { SignInMethodComponent } from "./authentication/sign-in-method/sign-in-method.component";
-import { LoginEmailComponent } from "./authentication/login-email/login-email.component";
 import { HomeComponent } from "./home/home.component";
 import { NavbarComponent } from "./core/navbar/navbar.component";
-import { CalenderComponent } from "./task-container/calender/calender.component";
-import { TaskObjectComponent } from "./task-container/task-object/task-object.component";
-import { YourTasksComponent } from "./task-container/your-tasks/your-tasks.component";
-import { TaskContainerComponent } from "./task-container/task-container.component";
 import { RemarksContainerComponent } from "./remarks-container/remarks-container.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { AvailableTasksComponent } from "./task-container/available-tasks/available-tasks.component";
 import "./prototypes.ts";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ModalComponent } from "./core/modal/modal.component";
-import { CreateTaskModalComponent } from "./task-container/create-task-modal/create-task-modal.component";
 import { MaterialModuleModule } from "./material-module/material-module.module";
+import { AuthenticationModule } from "./authentication/authentication.module";
+import { TaskContainerModule } from "./task-container/task-container.module";
 
 @NgModule({
   declarations: [
     AppComponent,
-    RegisterComponent,
-    SignInMethodComponent,
-    LoginEmailComponent,
     HomeComponent,
     NavbarComponent,
-    CalenderComponent,
-    TaskObjectComponent,
-    YourTasksComponent,
-    TaskContainerComponent,
     RemarksContainerComponent,
-    AvailableTasksComponent,
     ModalComponent,
-    CreateTaskModalComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    TaskContainerModule,
+    AuthenticationModule,
     ReactiveFormsModule,
     MaterialModuleModule,
     HttpClientModule,

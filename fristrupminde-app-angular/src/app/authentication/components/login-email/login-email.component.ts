@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy, Input } from "@angular/core";
-import { AuthComponent } from "../auth";
+import { AuthComponent } from "../../auth";
 import { Router } from "@angular/router";
 import { AuthenticationService } from "../../services/authentication/authentication.service";
-import ILoginDTO from "src/app/interfaces/ILoginDTO";
+import ILoginDTO from "src/app/authentication/interfaces/ILoginDTO";
 
 @Component({
   selector: "app-login-email",

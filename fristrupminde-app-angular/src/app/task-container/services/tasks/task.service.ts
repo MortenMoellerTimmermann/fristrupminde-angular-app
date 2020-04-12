@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { ApiComponent } from "../../api/api.component";
+import { ApiComponent } from "../../../api/api.component";
 import ITask from "../../interfaces/ITask";
 import ICreateTask from "../../interfaces/ICreateTask";
 import { Observable, throwError } from "rxjs";

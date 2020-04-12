@@ -1,11 +1,5 @@
-import {
-  Component,
-  OnInit,
-  OnChanges,
-  Input,
-  SimpleChanges,
-} from "@angular/core";
-import ITask from "src/app/interfaces/ITask";
+import { Component, OnInit, Input } from "@angular/core";
+import ITask from "src/app/task-container/interfaces/ITask";
 
 @Component({
   selector: "app-task-object",

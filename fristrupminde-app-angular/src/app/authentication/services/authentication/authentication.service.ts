@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
-import { ApiComponent } from "../../api/api.component";
+import { ApiComponent } from "../../../api/api.component";
 import { Observable, throwError } from "rxjs";
 import { retry, catchError } from "rxjs/operators";
-import ILoginDTO from "src/app/interfaces/ILoginDTO";
+import ILoginDTO from "src/app/authentication/interfaces/ILoginDTO";
 
 @Injectable({
   providedIn: "root",

@@ -9,7 +9,7 @@ import {
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { TaskService } from "../../services/tasks/task.service";
 import ICreateTask from "../../interfaces/ICreateTask";
-import ITask from "src/app/interfaces/ITask";
+import ITask from "src/app/task-container/interfaces/ITask";
 
 @Component({
   selector: "app-create-task-modal",
