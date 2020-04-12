@@ -5,6 +5,7 @@ import { CreateTaskModalComponent } from "./components/create-task-modal/create-
 import { TaskObjectComponent } from "./components/task-object/task-object.component";
 import { CalenderComponent } from "./components/calender/calender.component";
 import { AvailableTasksComponent } from "./components/available-tasks/available-tasks.component";
+import { CommonModule } from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -15,7 +16,7 @@ import { AvailableTasksComponent } from "./components/available-tasks/available-
     CalenderComponent,
     AvailableTasksComponent,
   ],
-  imports: [],
+  imports: [CommonModule],
   exports: [
     TaskContainerComponent,
     YourTasksComponent,
