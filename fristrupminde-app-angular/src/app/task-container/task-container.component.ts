@@ -52,7 +52,6 @@ export class TaskContainerComponent implements OnInit, OnDestroy {
   dateSelected(date: CalenderDate) {
     this.currentDateTasks = date.getTasks();
     this.selectedDate = date.getDateObject();
-    console.log(this.currentDateTasks);
   }
 
   changeRoute(path: taskPaths) {

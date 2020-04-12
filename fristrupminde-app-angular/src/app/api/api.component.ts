@@ -7,7 +7,11 @@ export class ApiComponent {
   baseUrl: String;
 
   constructor() {
-    this.baseUrl = "https://localhost:5002/api";
+    this.baseUrl = "https://localhost:5001/api";
+  }
+
+  login(): string {
+    return this.baseUrl + "/login";
   }
 
   getTasks(): string {

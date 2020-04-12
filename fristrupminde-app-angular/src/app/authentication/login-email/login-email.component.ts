@@ -1,30 +1,44 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { AngularFirestore } from "angularfire2/firestore";
+import { Component, OnInit, OnDestroy, Input } from "@angular/core";
+import { AuthComponent } from "../auth";
+import { Router } from "@angular/router";
 import { AuthenticationService } from "../../services/authentication/authentication.service";
+import ILoginDTO from "src/app/interfaces/ILoginDTO";
 
 @Component({
   selector: "app-login-email",
   templateUrl: "./login-email.component.html",
-  styleUrls: ["./login-email.component.scss"]
+  styleUrls: ["./login-email.component.scss"],
 })
-export class LoginEmailComponent implements OnInit {
-  public user = {
-    username: "",
-    password: ""
-  };
+export class LoginEmailComponent implements OnInit, OnDestroy {
+  user: ILoginDTO = <ILoginDTO>{};
+  subscription: any;
 
   constructor(
-    public AuthenticationService: AuthenticationService,
-    private afs: AngularFirestore
-  ) {}
+    private authenticationService: AuthenticationService,
+    private auth: AuthComponent,
+    private router: Router
+  ) {
+    this.user.email = "mortenmoellertimmermann@gmail.com";
+    this.user.password = "Timmer412#";
+  }
 
   ngOnInit() {}
 
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
+
   authenticate() {
-    console.log(this.user);
-    this.AuthenticationService.signInWithEmail(this.user);
+    this.subscription = this.authenticationService
+      .signInWithEmail(this.user)
+      .subscribe((token) => {
+        this.auth.setToken(token);
+        this.auth.setUser();
+        this.router.navigate(["/home"]);
+      });
   }
-  register() {
-    console.log("goodav da");
-  }
+
+  register() {}
 }

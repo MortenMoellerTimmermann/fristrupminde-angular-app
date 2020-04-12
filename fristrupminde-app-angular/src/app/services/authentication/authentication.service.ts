@@ -1,26 +1,37 @@
 import { Injectable } from "@angular/core";
-import { AngularFireAuth } from "angularfire2/auth";
-import { auth } from "firebase/app";
 import { Router } from "@angular/router";
-import { Observable } from "rxjs";
+import { HttpClient } from "@angular/common/http";
+import { ApiComponent } from "../../api/api.component";
+import { Observable, throwError } from "rxjs";
+import { retry, catchError } from "rxjs/operators";
+import ILoginDTO from "src/app/interfaces/ILoginDTO";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class AuthenticationService {
-  constructor(public afAuth: AngularFireAuth, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private api: ApiComponent,
+    private router: Router
+  ) {}
 
-  signInWithEmail(User) {
-    this.afAuth.auth
-      .signInWithEmailAndPassword(User.username, User.password)
-      .then(() => {
-        console.log(auth().currentUser);
-        this.router.navigate(["/"]);
-      })
-      .catch(function(error) {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        console.log(errorMessage);
-      });
+  signInWithEmail(User: ILoginDTO): Observable<any> {
+    return this.http
+      .post<ILoginDTO>(this.api.login(), User)
+      .pipe(catchError(this.handleError));
+  }
+
+  handleError(error) {
+    let errorMessage = "";
+    if (error.error instanceof ErrorEvent) {
+      // client-side error
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      // server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    console.log(errorMessage);
+    return throwError(errorMessage);
   }
 }
