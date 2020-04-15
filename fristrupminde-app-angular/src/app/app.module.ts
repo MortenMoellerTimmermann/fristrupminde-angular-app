@@ -5,13 +5,6 @@ import { HttpClientModule } from "@angular/common/http";
 import { AuthGuardService } from "./authentication/authguard";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { AngularFireModule } from "angularfire2";
-import {
-  AngularFirestore,
-  AngularFirestoreModule,
-} from "angularfire2/firestore";
-import { AngularFireAuth } from "angularfire2/auth";
-import { environment } from "../environments/environment";
 
 import { HomeComponent } from "./home/home.component";
 import { NavbarComponent } from "./core/navbar/navbar.component";
@@ -21,8 +14,14 @@ import "./prototypes.ts";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ModalComponent } from "./core/modal/modal.component";
 import { MaterialModuleModule } from "./material-module/material-module.module";
-import { AuthenticationModule } from "./authentication/authentication.module";
-import { TaskContainerModule } from "./task-container/task-container.module";
+import { YourTasksComponent } from "./task-container/components/your-tasks/your-tasks.component";
+import { AvailableTasksComponent } from "./task-container/components/available-tasks/available-tasks.component";
+import { CreateTaskModalComponent } from "./task-container/components/create-task-modal/create-task-modal.component";
+import { CalenderComponent } from "./task-container/components/calender/calender.component";
+import { TaskContainerComponent } from "./task-container/task-container.component";
+import { TaskObjectComponent } from "./task-container/components/task-object/task-object.component";
+import { LoginEmailComponent } from "./authentication/components/login-email/login-email.component";
+import { RegisterComponent } from "./authentication/components/register/register.component";
 
 @NgModule({
   declarations: [
@@ -31,21 +30,25 @@ import { TaskContainerModule } from "./task-container/task-container.module";
     NavbarComponent,
     RemarksContainerComponent,
     ModalComponent,
+    YourTasksComponent,
+    AvailableTasksComponent,
+    CreateTaskModalComponent,
+    CalenderComponent,
+    TaskContainerComponent,
+    TaskObjectComponent,
+    LoginEmailComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    TaskContainerModule,
-    AuthenticationModule,
     ReactiveFormsModule,
     MaterialModuleModule,
     HttpClientModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
     BrowserAnimationsModule,
   ],
-  providers: [AngularFireAuth, AngularFirestore, AuthGuardService],
+  providers: [AuthGuardService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

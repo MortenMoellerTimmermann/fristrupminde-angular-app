@@ -38,7 +38,7 @@ export class TaskContainerComponent implements OnInit, OnDestroy {
   }
 
   getTasks() {
-    this.taskSubscription = this.taskService.getTasks().subscribe(
+    this.taskSubscription = this.taskService.getUserTasks().subscribe(
       (data) => (this.tasks = data),
       (error) => (this.tasks = Array<ITask>())
     );

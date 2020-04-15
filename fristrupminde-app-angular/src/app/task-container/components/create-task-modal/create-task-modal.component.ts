@@ -21,8 +21,8 @@ export class CreateTaskModalComponent implements OnInit, OnDestroy {
   @Output() onCloseModalEvent: EventEmitter<any> = new EventEmitter();
   @Output() onAddTask: EventEmitter<ITask> = new EventEmitter();
   taskForm: FormGroup;
-  options: Array<String>;
-  postSubscription: any;
+  emails: Array<String>;
+  subscriptions: Array<any> = new Array();
 
   constructor(
     private taskService: TaskService,
@@ -36,12 +36,16 @@ export class CreateTaskModalComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.subscriptions.push(
+      this.taskService.getUserEmails().subscribe((data) => (this.emails = data))
+    );
+  }
 
   ngOnDestroy(): void {
-    if (this.postSubscription !== undefined) {
-      this.postSubscription.unsubcribe();
-    }
+    this.subscriptions.forEach((sub) => {
+      sub.unsubcribe();
+    });
   }
 
   onCloseModal(): void {
@@ -63,12 +67,12 @@ export class CreateTaskModalComponent implements OnInit, OnDestroy {
     task.description = taskForm.controls["description"].value;
     task.dueDate = taskForm.controls["duedate"].value;
     task.assignedTo = taskForm.controls["assignedTo"].value;
-    this.postSubscription = this.taskService
-      .createTask(task)
-      .subscribe((generatedID) => {
+    this.subscriptions.push(
+      this.taskService.createTask(task).subscribe((generatedID) => {
         this.onAddTask.emit(this.convertToITask(task, generatedID));
         taskForm.reset();
         this.onCloseModal();
-      });
+      })
+    );
   }
 }

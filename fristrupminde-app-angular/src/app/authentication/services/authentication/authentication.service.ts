@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { ApiComponent } from "../../../api/api.component";
 import { Observable, throwError } from "rxjs";
 import { retry, catchError } from "rxjs/operators";
@@ -16,9 +16,15 @@ export class AuthenticationService {
     private router: Router
   ) {}
 
-  signInWithEmail(User: ILoginDTO): Observable<any> {
+  signInWithEmail(user: ILoginDTO): Observable<any> {
     return this.http
-      .post<ILoginDTO>(this.api.login(), User)
+      .post<ILoginDTO>(this.api.login(), user)
+      .pipe(catchError(this.handleError));
+  }
+
+  validateToken(): Observable<any> {
+    return this.http
+      .post<String>(this.api.validateToken(), null, this.api.getHeader())
       .pipe(catchError(this.handleError));
   }
 
@@ -30,8 +36,10 @@ export class AuthenticationService {
     } else {
       // server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+      if (error.status === 200) {
+        return [];
+      }
     }
-    console.log(errorMessage);
     return throwError(errorMessage);
   }
 }

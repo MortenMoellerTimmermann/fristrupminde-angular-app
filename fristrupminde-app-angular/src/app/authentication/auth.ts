@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import IUser from "./interfaces/IUser";
+import { AuthenticationService } from "./services/authentication/authentication.service";
 
 @Injectable({
   providedIn: "root",
@@ -14,11 +15,11 @@ export class AuthComponent {
     this.user = null;
   }
 
-  isLoggedIn() {
-    if (window.localStorage.getItem("jwt_token") === null) {
-      return false;
+  isLoggedIn(): boolean {
+    if (window.localStorage.getItem("jwt_token") !== null) {
+      return true;
     }
-    return true;
+    return false;
   }
 
   setToken(token: string): void {

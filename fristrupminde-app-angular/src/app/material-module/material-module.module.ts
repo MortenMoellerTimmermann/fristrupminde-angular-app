@@ -9,6 +9,7 @@ import { MatNativeDateModule } from "@angular/material/core";
 @NgModule({
   declarations: [],
   imports: [
+    CommonModule,
     MatAutocompleteModule,
     MatInputModule,
     MatFormFieldModule,

@@ -59,8 +59,8 @@
         />
 
         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-          <mat-option *ngFor="let option of options" [value]="option">
-            {{ option }}
+          <mat-option *ngFor="let email of emails" [value]="email">
+            {{ email }}
           </mat-option>
         </mat-autocomplete>
       </div>

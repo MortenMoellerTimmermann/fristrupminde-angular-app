@@ -12,15 +12,27 @@ import { retry, catchError } from "rxjs/operators";
 export class TaskService {
   constructor(private http: HttpClient, private api: ApiComponent) {}
 
-  getTasks(): Observable<ITask[]> {
+  getAllTasks(): Observable<ITask[]> {
     return this.http
-      .get<ITask[]>(this.api.getTasks())
+      .get<ITask[]>(this.api.getAllTasks())
+      .pipe(catchError(this.handleError));
+  }
+
+  getUserTasks(): Observable<ITask[]> {
+    return this.http
+      .get<ITask[]>(this.api.getUserTasks(), this.api.getHeader())
       .pipe(catchError(this.handleError));
   }
 
   createTask(task: ICreateTask): Observable<any> {
     return this.http
-      .post<ICreateTask>(this.api.postTasks(), task)
+      .post<ICreateTask>(this.api.createTask(), task)
+      .pipe(catchError(this.handleError));
+  }
+
+  getUserEmails(): Observable<String[]> {
+    return this.http
+      .get<String[]>(this.api.getUserEmails())
       .pipe(catchError(this.handleError));
   }
 

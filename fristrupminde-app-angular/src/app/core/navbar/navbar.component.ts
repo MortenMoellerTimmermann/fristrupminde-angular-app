@@ -33,7 +33,6 @@ export class NavbarComponent implements OnInit {
   }
 
   getUserEmail(): string {
-    console.log(this.auth.user);
     return this.auth.user.email;
   }
 }

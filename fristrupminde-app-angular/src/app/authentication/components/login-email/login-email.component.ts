@@ -31,6 +31,7 @@ export class LoginEmailComponent implements OnInit, OnDestroy {
   }
 
   authenticate() {
+    console.log(this.user);
     this.subscription = this.authenticationService
       .signInWithEmail(this.user)
       .subscribe((token) => {
