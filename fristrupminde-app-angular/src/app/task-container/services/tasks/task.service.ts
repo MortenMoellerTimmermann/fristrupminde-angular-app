@@ -32,7 +32,7 @@ export class TaskService {
 
   getUserEmails(): Observable<String[]> {
     return this.http
-      .get<String[]>(this.api.getUserEmails())
+      .get<String[]>(this.api.getUserEmails(), this.api.getHeader())
       .pipe(catchError(this.handleError));
   }
 

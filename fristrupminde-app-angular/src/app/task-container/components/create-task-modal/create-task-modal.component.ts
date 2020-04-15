@@ -44,7 +44,9 @@ export class CreateTaskModalComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.forEach((sub) => {
-      sub.unsubcribe();
+      if (sub) {
+        // sub.unsubcribe();
+      }
     });
   }
 
