@@ -1,3 +1,37 @@
-<p>
-  register works!
-</p>
+<div class="container">
+  <div class="login-box">
+    <h1>Register</h1>
+    <div class="input-container">
+      <form [formGroup]="taskForm">
+        <input
+          id="email"
+          class="self-input"
+          placeholder="Email"
+          type="text"
+          formControlName="email"
+        />
+        <input
+          id="password"
+          class="self-input"
+          placeholder="Email"
+          type="password"
+          formControlName="password"
+        />
+        <input
+          id="confirmPassword"
+          class="self-input"
+          placeholder="confirmPassword"
+          type="password"
+          formControlName="password"
+        />
+      </form>
+    </div>
+    <div class="button-container">
+      <button (click)="register(taskForm)">Register</button>
+      <p>
+        <span> Eller</span>
+      </p>
+      <h3 (click)="login()">Login</h3>
+    </div>
+  </div>
+</div>

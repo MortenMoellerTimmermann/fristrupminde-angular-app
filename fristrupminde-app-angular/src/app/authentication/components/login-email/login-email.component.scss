@@ -23,6 +23,7 @@
 .input-container {
   padding-top: 20px;
   height: 30%;
+  text-align: center;
   .self-input {
     float: left;
     outline: none;
@@ -45,9 +46,22 @@
       border-bottom: 2px solid #376dbd;
     }
   }
+  button {
+    margin-top: 30px;
+    background-color: #376dbd;
+    width: 60%;
+    height: 40px;
+    border-radius: 10px;
+    font-size: 16px;
+    color: #fff;
+    &:hover {
+      background-color: rgb(7, 63, 141);
+    }
+  }
 }
+
 .button-container {
-  margin-top: 20px;
+  margin-top: 30px;
   text-align: center;
   button {
     background-color: #376dbd;
@@ -61,9 +75,23 @@
     }
   }
   h3 {
+    margin-top: 30px;
     color: #376dbd;
     &:hover {
       cursor: pointer;
+    }
+  }
+  p {
+    margin-top: 35px;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border-bottom: 1px solid #000;
+    line-height: 0.1em;
+    span {
+      background: #fff;
+      padding: 0 10px;
     }
   }
 }

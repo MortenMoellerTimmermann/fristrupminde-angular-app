@@ -3,6 +3,7 @@ import { AuthComponent } from "../../auth";
 import { Router } from "@angular/router";
 import { AuthenticationService } from "../../services/authentication/authentication.service";
 import ILoginDTO from "src/app/authentication/interfaces/ILoginDTO";
+import { FormGroup, FormBuilder } from "@angular/forms";
 
 @Component({
   selector: "app-login-email",
@@ -10,16 +11,19 @@ import ILoginDTO from "src/app/authentication/interfaces/ILoginDTO";
   styleUrls: ["./login-email.component.scss"],
 })
 export class LoginEmailComponent implements OnInit, OnDestroy {
-  user: ILoginDTO = <ILoginDTO>{};
+  taskForm: FormGroup;
   subscription: any;
 
   constructor(
     private authenticationService: AuthenticationService,
     private auth: AuthComponent,
+    private formBuilder: FormBuilder,
     private router: Router
   ) {
-    this.user.email = "mortenmoellertimmermann@gmail.com";
-    this.user.password = "Timmer412#";
+    this.taskForm = this.formBuilder.group({
+      email: "mortenmoellertimmermann@gmail.com",
+      password: "Timmer412#",
+    });
   }
 
   ngOnInit() {}
@@ -30,16 +34,21 @@ export class LoginEmailComponent implements OnInit, OnDestroy {
     }
   }
 
-  authenticate() {
-    console.log(this.user);
+  authenticate(taskForm: FormGroup) {
+    let user = <ILoginDTO>{};
+    user.email = taskForm.controls["email"].value;
+    user.password = taskForm.controls["password"].value;
     this.subscription = this.authenticationService
-      .signInWithEmail(this.user)
+      .signInWithEmail(user)
       .subscribe((token) => {
+        taskForm.reset();
         this.auth.setToken(token);
         this.auth.setUser();
         this.router.navigate(["/home"]);
       });
   }
 
-  register() {}
+  register() {
+    this.router.navigate(["/register"]);
+  }
 }

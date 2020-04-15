@@ -5,6 +5,7 @@ import { ApiComponent } from "../../../api/api.component";
 import { Observable, throwError } from "rxjs";
 import { retry, catchError } from "rxjs/operators";
 import ILoginDTO from "src/app/authentication/interfaces/ILoginDTO";
+import IRegisterDTO from "../../interfaces/IRegisterDTO";
 
 @Injectable({
   providedIn: "root",
@@ -19,6 +20,12 @@ export class AuthenticationService {
   signInWithEmail(user: ILoginDTO): Observable<any> {
     return this.http
       .post<ILoginDTO>(this.api.login(), user)
+      .pipe(catchError(this.handleError));
+  }
+
+  register(user: IRegisterDTO): Observable<any> {
+    return this.http
+      .post<IRegisterDTO>(this.api.register(), user)
       .pipe(catchError(this.handleError));
   }
 

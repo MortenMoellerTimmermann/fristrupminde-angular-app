@@ -2,17 +2,28 @@
   <div class="login-box">
     <h1>Login</h1>
     <div class="input-container">
-      <input class="self-input" placeholder="Email" [(ngModel)]="user.email" />
-      <input
-        class="self-input"
-        type="password"
-        placeholder="Password"
-        [(ngModel)]="user.password"
-      />
+      <form [formGroup]="taskForm">
+        <input
+          id="email"
+          class="self-input"
+          placeholder="Email"
+          type="text"
+          formControlName="email"
+        />
+        <input
+          id="password"
+          class="self-input"
+          placeholder="Email"
+          type="password"
+          formControlName="password"
+        />
+      </form>
     </div>
     <div class="button-container">
-      <button (click)="authenticate()">Login</button>
-      <p>- eller -</p>
+      <button (click)="authenticate(taskForm)">Login</button>
+      <p>
+        <span> Eller</span>
+      </p>
       <h3 (click)="register()">Register</h3>
     </div>
   </div>

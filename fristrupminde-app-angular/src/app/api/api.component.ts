@@ -23,6 +23,10 @@ export class ApiComponent {
     return this.baseUrl + "/login";
   }
 
+  register(): string {
+    return this.baseUrl + "/register";
+  }
+
   getUserEmails(): string {
     return this.baseUrl + "/getUserEmails";
   }
