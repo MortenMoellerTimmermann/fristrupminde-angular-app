@@ -33,6 +33,6 @@ export class NavbarComponent implements OnInit {
   }
 
   getUserEmail(): string {
-    return this.auth.user.email;
+    return this.auth.user !== undefined ? this.auth.user.email : "";
   }
 }

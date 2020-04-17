@@ -1,8 +1,14 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { HttpClient, HttpParams } from "@angular/common/http";
+import {
+  HttpClient,
+  HttpParams,
+  HttpEvent,
+  HttpResponse,
+} from "@angular/common/http";
 import { ApiComponent } from "../../../api/api.component";
 import { Observable, throwError } from "rxjs";
+import { map } from "rxjs/operators";
 import { retry, catchError } from "rxjs/operators";
 import ILoginDTO from "src/app/authentication/interfaces/ILoginDTO";
 import IRegisterDTO from "../../interfaces/IRegisterDTO";
@@ -31,7 +37,7 @@ export class AuthenticationService {
 
   validateToken(): Observable<any> {
     return this.http
-      .post<String>(this.api.validateToken(), null, this.api.getHeader())
+      .get<HttpEvent<any>>(this.api.validateToken())
       .pipe(catchError(this.handleError));
   }
 

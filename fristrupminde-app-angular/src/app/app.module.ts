@@ -1,6 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
 import { AuthGuardService } from "./authentication/authguard";
 import { AppRoutingModule } from "./app-routing.module";
@@ -22,6 +22,8 @@ import { TaskContainerComponent } from "./task-container/task-container.componen
 import { TaskObjectComponent } from "./task-container/components/task-object/task-object.component";
 import { LoginEmailComponent } from "./authentication/components/login-email/login-email.component";
 import { RegisterComponent } from "./authentication/components/register/register.component";
+import { HeaderInterceptor } from "./core/header-interceptor/header-interceptor.interceptor";
+import { AuthenticationInterceptor } from "./core/authentication-interceptor/authentication.interceptor";
 
 @NgModule({
   declarations: [
@@ -48,7 +50,19 @@ import { RegisterComponent } from "./authentication/components/register/register
     AppRoutingModule,
     BrowserAnimationsModule,
   ],
-  providers: [AuthGuardService],
+  providers: [
+    AuthGuardService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HeaderInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthenticationInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

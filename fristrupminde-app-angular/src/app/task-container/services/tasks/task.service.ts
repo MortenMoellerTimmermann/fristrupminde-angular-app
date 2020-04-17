@@ -20,7 +20,7 @@ export class TaskService {
 
   getUserTasks(): Observable<ITask[]> {
     return this.http
-      .get<ITask[]>(this.api.getUserTasks(), this.api.getHeader())
+      .get<ITask[]>(this.api.getUserTasks())
       .pipe(catchError(this.handleError));
   }
 
@@ -32,7 +32,7 @@ export class TaskService {
 
   getUserEmails(): Observable<String[]> {
     return this.http
-      .get<String[]>(this.api.getUserEmails(), this.api.getHeader())
+      .get<String[]>(this.api.getUserEmails())
       .pipe(catchError(this.handleError));
   }
 
@@ -45,7 +45,6 @@ export class TaskService {
       // server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    console.log(errorMessage);
     return throwError(errorMessage);
   }
 }

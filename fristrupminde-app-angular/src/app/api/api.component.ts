@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { HttpHeaders } from "@angular/common/http";
 import { AuthComponent } from "../authentication/auth";
 
 @Injectable({
@@ -10,13 +9,6 @@ export class ApiComponent {
 
   constructor(private auth: AuthComponent) {
     this.baseUrl = "https://localhost:5001/api";
-  }
-
-  getHeader(): Object {
-    var header = {
-      headers: new HttpHeaders().set("Authorization", this.auth.getToken()),
-    };
-    return header;
   }
 
   login(): string {

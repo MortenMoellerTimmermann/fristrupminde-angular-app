@@ -46,6 +46,10 @@ export class AuthComponent {
   }
 
   getToken(): string {
-    return localStorage.getItem("jwt_token");
+    let token = localStorage.getItem("jwt_token");
+    if (token !== null) {
+      return token;
+    }
+    return "";
   }
 }
