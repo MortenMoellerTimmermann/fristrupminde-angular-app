@@ -2,17 +2,16 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { TaskContainerRoutingModule } from "./task-container-routing.module";
 import { TaskService } from "./services/tasks/task.service";
-import { MaterialModuleModule } from "../material-module/material-module.module";
-import { ModalComponent } from "../core/modal/modal.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { SharedModule } from "src/shared/shared.module";
 
 @NgModule({
-  declarations: [TaskContainerRoutingModule.COMPONENTS, ModalComponent],
+  declarations: [TaskContainerRoutingModule.COMPONENTS],
   imports: [
     CommonModule,
     TaskContainerRoutingModule,
-    MaterialModuleModule,
     FormsModule,
+    SharedModule,
     ReactiveFormsModule,
   ],
   providers: [TaskService],

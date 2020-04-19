@@ -1,14 +1,14 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { ModalComponent } from "./modal/modal.component";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from "@angular/material/core";
-import { MatSnackBar } from "@angular/material/snack-bar";
 
 @NgModule({
-  declarations: [],
+  declarations: [ModalComponent],
   imports: [
     CommonModule,
     MatAutocompleteModule,
@@ -18,6 +18,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
     MatNativeDateModule,
   ],
   exports: [
+    ModalComponent,
     MatAutocompleteModule,
     MatInputModule,
     MatFormFieldModule,
@@ -25,4 +26,4 @@ import { MatSnackBar } from "@angular/material/snack-bar";
     MatNativeDateModule,
   ],
 })
-export class MaterialModuleModule {}
+export class SharedModule {}
