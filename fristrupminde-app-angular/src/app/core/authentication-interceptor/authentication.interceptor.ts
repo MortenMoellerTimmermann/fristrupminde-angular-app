@@ -34,5 +34,7 @@ export class AuthenticationInterceptor implements HttpInterceptor {
       this.router.navigate(["/login"]);
       return next.handle(request);
     }
+    //Everything else
+    return next.handle(request);
   }
 }

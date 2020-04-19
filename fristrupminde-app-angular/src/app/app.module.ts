@@ -24,6 +24,8 @@ import { LoginEmailComponent } from "./authentication/components/login-email/log
 import { RegisterComponent } from "./authentication/components/register/register.component";
 import { HeaderInterceptor } from "./core/header-interceptor/header-interceptor.interceptor";
 import { AuthenticationInterceptor } from "./core/authentication-interceptor/authentication.interceptor";
+import { AuthenticationModule } from "./authentication/authentication.module";
+import { TaskContainerModule } from "./task-container/task-container.module";
 
 @NgModule({
   declarations: [
@@ -31,21 +33,15 @@ import { AuthenticationInterceptor } from "./core/authentication-interceptor/aut
     HomeComponent,
     NavbarComponent,
     RemarksContainerComponent,
-    ModalComponent,
-    YourTasksComponent,
-    AvailableTasksComponent,
-    CreateTaskModalComponent,
-    CalenderComponent,
-    TaskContainerComponent,
-    TaskObjectComponent,
-    LoginEmailComponent,
-    RegisterComponent,
+    //   ModalComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     MaterialModuleModule,
+    AuthenticationModule,
+    TaskContainerModule,
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,

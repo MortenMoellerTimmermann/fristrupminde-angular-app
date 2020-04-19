@@ -1,10 +1,7 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { AuthGuardService } from "./authentication/authguard";
-import { RegisterComponent } from "./authentication/components/register/register.component";
-import { LoginEmailComponent } from "./authentication/components/login-email/login-email.component";
 import { TaskContainerComponent } from "./task-container/task-container.component";
-import { YourTasksComponent } from "./task-container/components/your-tasks/your-tasks.component";
 import { RemarksContainerComponent } from "./remarks-container/remarks-container.component";
 import { HomeComponent } from "./home/home.component";
 
@@ -18,17 +15,15 @@ const routes: Routes = [
       {
         path: "tasks",
         component: TaskContainerComponent,
-        children: [
-          { path: "", redirectTo: "your-tasks", pathMatch: "full" },
-          { path: "your-tasks", component: YourTasksComponent },
-          { path: "available-tasks", component: RegisterComponent },
-        ],
+        loadChildren: () =>
+          import("./task-container/task-container.module").then(
+            (m) => m.TaskContainerModule
+          ),
       },
       { path: "remarks", component: RemarksContainerComponent },
     ],
   },
-  { path: "register", component: RegisterComponent },
-  { path: "login", component: LoginEmailComponent },
+  // { path: "**", component: ROUTENOTFOUNDPAGE },
 ];
 
 @NgModule({
