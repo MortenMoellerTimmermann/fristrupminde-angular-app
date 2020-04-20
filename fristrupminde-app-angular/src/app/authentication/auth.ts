@@ -52,4 +52,8 @@ export class AuthComponent {
     }
     return "";
   }
+
+  getUserEmail(): string {
+    return this.user ? this.user.email : "";
+  }
 }

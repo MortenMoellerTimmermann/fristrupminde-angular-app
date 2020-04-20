@@ -4,4 +4,5 @@ export default interface ITask {
   title: string;
   created: Date;
   dueDate: Date;
+  assignedTo?: string;
 }

@@ -4,6 +4,7 @@ import { Subject } from "rxjs";
 import { TaskService } from "./services/tasks/task.service";
 import ITask from "./interfaces/ITask";
 import CalenderDate from "./models/calenderDate";
+import { AuthComponent } from "../authentication/auth";
 
 @Component({
   selector: "app-task-container",
@@ -16,12 +17,18 @@ export class TaskContainerComponent implements OnInit, OnDestroy {
   selectedDate: Date;
   selectedDateString: string = "";
   tasks: Array<ITask>;
-  taskSubscription: any;
+  availableTasks: Array<ITask>;
+  subscriptions: Array<any> = new Array<any>();
   currentDateTasks: Array<ITask>;
+  currentDateAvailableTasks: Array<ITask>;
   openModal: boolean = false;
   notifyCalenderObservable: Subject<ITask> = new Subject();
 
-  constructor(router: Router, private taskService: TaskService) {
+  constructor(
+    router: Router,
+    private taskService: TaskService,
+    private auth: AuthComponent
+  ) {
     if (router.url.includes("your-tasks")) {
       this.currentPath = taskPaths.your_tasks;
     } else if (router.url.includes("available-tasks")) {
@@ -31,26 +38,43 @@ export class TaskContainerComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getTasks();
+    this.getAvailableTasks();
   }
 
   ngOnDestroy() {
-    this.taskSubscription.unsubscribe();
+    this.subscriptions.forEach((sub) => {
+      sub.unsubscribe();
+    });
   }
 
   getTasks() {
-    this.taskSubscription = this.taskService.getUserTasks().subscribe(
-      (data) => (this.tasks = data),
-      (error) => (this.tasks = Array<ITask>())
+    this.subscriptions.push(
+      this.taskService.getUserTasks().subscribe(
+        (data) => (this.tasks = data),
+        (error) => (this.tasks = Array<ITask>())
+      )
+    );
+  }
+
+  getAvailableTasks() {
+    this.subscriptions.push(
+      this.taskService.getAvailableTasks().subscribe(
+        (data) => (this.availableTasks = data),
+        (error) => (this.availableTasks = Array<ITask>())
+      )
     );
   }
 
   addNewTask(itask: ITask): void {
-    this.tasks.push(itask);
-    this.notifyCalenderObservable.next(itask);
+    if (itask.assignedTo === this.auth.getUserEmail()) {
+      this.tasks.push(itask);
+      this.notifyCalenderObservable.next(itask);
+    }
   }
 
   dateSelected(date: CalenderDate) {
     this.currentDateTasks = date.getTasks();
+    this.currentDateAvailableTasks = date.getAvailableTasks();
     this.selectedDate = date.getDateObject();
   }
 

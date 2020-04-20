@@ -18,6 +18,12 @@ export class TaskService {
       .pipe(catchError(this.handleError));
   }
 
+  getAvailableTasks(): Observable<ITask[]> {
+    return this.http
+      .get<ITask[]>(this.api.getAvailableTasks())
+      .pipe(catchError(this.handleError));
+  }
+
   getUserTasks(): Observable<ITask[]> {
     return this.http
       .get<ITask[]>(this.api.getUserTasks())

@@ -19,6 +19,9 @@
         font-weight: bold;
         color: black;
       }
+      &:active {
+        font-weight: normal;
+      }
     }
   }
   .calender-header {
@@ -73,6 +76,13 @@
           text-decoration: underline;
         }
         font-weight: bold;
+      }
+      .today-date {
+        .date {
+          color: rgb(50, 50, 235) !important;
+          text-decoration: underline !important;
+        }
+        font-weight: bold !important;
       }
     }
   }

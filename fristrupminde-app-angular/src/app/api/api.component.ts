@@ -12,15 +12,15 @@ export class ApiComponent {
   }
 
   login(): string {
-    return this.baseUrl + "/login";
+    return this.baseUrl + "/user/login";
   }
 
   register(): string {
-    return this.baseUrl + "/register";
+    return this.baseUrl + "/user/register";
   }
 
   getUserEmails(): string {
-    return this.baseUrl + "/getUserEmails";
+    return this.baseUrl + "/user/emails";
   }
 
   validateToken(): string {
@@ -28,14 +28,18 @@ export class ApiComponent {
   }
 
   getAllTasks(): string {
-    return this.baseUrl + "/getAllTasks";
+    return this.baseUrl + "/task/getAll";
   }
 
   getUserTasks(): string {
-    return this.baseUrl + "/user/getTasks";
+    return this.baseUrl + "/task/user/getTasks";
+  }
+
+  getAvailableTasks(): string {
+    return this.baseUrl + "/task/getAvailable";
   }
 
   createTask(): string {
-    return this.baseUrl + "/createTask";
+    return this.baseUrl + "/task/create";
   }
 }

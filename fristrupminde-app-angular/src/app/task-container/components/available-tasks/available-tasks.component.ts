@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
+import ITask from "../../interfaces/ITask";
 
 @Component({
   selector: "app-available-tasks",
@@ -8,8 +9,17 @@ import { Component, OnInit, Input } from "@angular/core";
 //Extend??
 export class AvailableTasksComponent implements OnInit {
   @Input() date: Date;
+  @Input() availableTasks: Array<ITask>;
 
   constructor() {}
 
   ngOnInit(): void {}
+
+  getDateString(): string {
+    if (this.date !== undefined) {
+      return (
+        "Ledige opgaver den " + this.date.toLocaleDateString().split(" ")[0]
+      );
+    } else return "";
+  }
 }

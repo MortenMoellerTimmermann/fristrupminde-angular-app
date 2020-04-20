@@ -3,6 +3,7 @@
     <app-calender
       *ngIf="tasks"
       [tasks]="tasks"
+      [availableTasks]="availableTasks"
       [newTaskSubscription]="notifyCalenderObservable"
       (onSelectDateEvent)="dateSelected($event)"
     >
@@ -45,6 +46,7 @@
         <app-available-tasks
           *ngIf="currentPath === taskPaths.available_tasks"
           [date]="selectedDate"
+          [availableTasks]="currentDateAvailableTasks"
         >
         </app-available-tasks>
       </div>

@@ -26,6 +26,8 @@
           [className]="
             checkIfSameDate(date)
               ? 'selected-date'
+              : checkIfToday(date)
+              ? 'today-date'
               : date.otherMonth
               ? 'other-month'
               : 'current-month'

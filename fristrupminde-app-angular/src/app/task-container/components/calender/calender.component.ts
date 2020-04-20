@@ -17,6 +17,7 @@ import ITask from "../../interfaces/ITask";
 })
 export class CalenderComponent implements OnInit, OnDestroy {
   @Input() tasks: Array<ITask>;
+  @Input() availableTasks: Array<ITask>;
   @Input() newTaskSubscription: Subject<ITask>;
   @Output() onSelectDateEvent: EventEmitter<CalenderDate> = new EventEmitter();
   selectedDate: CalenderDate;
@@ -59,7 +60,8 @@ export class CalenderComponent implements OnInit, OnDestroy {
     this.selectedDate = new CalenderDate(
       new Date(),
       false,
-      this.getAmountOfTasksForDate(new Date())
+      this.getAmountOfTasksForDate(new Date(), this.tasks),
+      this.getAmountOfTasksForDate(new Date(), this.availableTasks)
     );
     this.getDatesForMonth(currentDay);
   }
@@ -83,7 +85,8 @@ export class CalenderComponent implements OnInit, OnDestroy {
         new CalenderDate(
           tempDatesArray[i],
           true,
-          this.getAmountOfTasksForDate(tempDatesArray[i])
+          this.getAmountOfTasksForDate(tempDatesArray[i], this.tasks),
+          this.getAmountOfTasksForDate(tempDatesArray[i], this.availableTasks)
         )
       );
     }
@@ -97,7 +100,8 @@ export class CalenderComponent implements OnInit, OnDestroy {
         new CalenderDate(
           dateToAdd,
           true,
-          this.getAmountOfTasksForDate(dateToAdd)
+          this.getAmountOfTasksForDate(dateToAdd, this.tasks),
+          this.getAmountOfTasksForDate(dateToAdd, this.availableTasks)
         )
       );
     }
@@ -124,7 +128,8 @@ export class CalenderComponent implements OnInit, OnDestroy {
         new CalenderDate(
           dateToAdd,
           false,
-          this.getAmountOfTasksForDate(dateToAdd)
+          this.getAmountOfTasksForDate(dateToAdd, this.tasks),
+          this.getAmountOfTasksForDate(dateToAdd, this.availableTasks)
         )
       );
       if (currentDay.getDay() == 0) {
@@ -188,11 +193,15 @@ export class CalenderComponent implements OnInit, OnDestroy {
     }
   }
 
-  checkIfSameDate(calenderDate: CalenderDate): Boolean {
+  checkIfToday(calenderDate: CalenderDate): boolean {
+    return calenderDate.getDateObject().isSameDateAs(new Date());
+  }
+
+  checkIfSameDate(calenderDate: CalenderDate): boolean {
     if (
-      this.selectedDate != null &&
-      calenderDate.date.getMonth() == this.selectedDate.date.getMonth() &&
-      calenderDate.date.getDate() == this.selectedDate.date.getDate()
+      this.selectedDate
+        .getDateObject()
+        .isSameDateAs(calenderDate.getDateObject())
     ) {
       return true;
     } else {
@@ -200,9 +209,9 @@ export class CalenderComponent implements OnInit, OnDestroy {
     }
   }
 
-  getAmountOfTasksForDate(date: Date): Array<ITask> {
+  getAmountOfTasksForDate(date: Date, taskArray: Array<ITask>): Array<ITask> {
     var temp: Array<ITask> = new Array();
-    this.tasks.forEach((task) => {
+    taskArray.forEach((task) => {
       let taskDate: Date = new Date(task.dueDate);
       if (date.isSameDateAs(taskDate)) {
         temp.push(task);

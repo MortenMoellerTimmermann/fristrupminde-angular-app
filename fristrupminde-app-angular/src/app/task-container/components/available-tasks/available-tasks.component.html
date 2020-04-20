@@ -1,1 +1,5 @@
-<p>available-tasks works!</p>
+<div class="tasks-inner-container">
+  <h2>{{ getDateString() }}</h2>
+  <app-task-object *ngFor="let task of availableTasks" [task]="task">
+  </app-task-object>
+</div>

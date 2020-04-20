@@ -59,6 +59,7 @@ export class CreateTaskModalComponent implements OnInit, OnDestroy {
     itask.title = icreateTask.title;
     itask.description = icreateTask.description;
     itask.dueDate = new Date(icreateTask.dueDate);
+    itask.assignedTo = icreateTask.assignedTo;
     return itask;
   }
 
