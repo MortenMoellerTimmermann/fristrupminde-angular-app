@@ -47,6 +47,7 @@
           *ngIf="currentPath === taskPaths.available_tasks"
           [date]="selectedDate"
           [availableTasks]="currentDateAvailableTasks"
+          (onTakeTask)="addNewTask($event)"
         >
         </app-available-tasks>
       </div>

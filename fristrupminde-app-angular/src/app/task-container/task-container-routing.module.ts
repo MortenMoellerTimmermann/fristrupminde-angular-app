@@ -6,6 +6,7 @@ import { CreateTaskModalComponent } from "./components/create-task-modal/create-
 import { TaskObjectComponent } from "./components/task-object/task-object.component";
 import { YourTasksComponent } from "./components/your-tasks/your-tasks.component";
 import { TaskContainerComponent } from "./task-container.component";
+import { AvailableTaskObjectComponent } from "./components/available-task-object/available-task-object.component";
 
 const routes: Routes = [
   {
@@ -29,5 +30,6 @@ export class TaskContainerRoutingModule {
     CreateTaskModalComponent,
     TaskObjectComponent,
     YourTasksComponent,
+    AvailableTaskObjectComponent,
   ];
 }

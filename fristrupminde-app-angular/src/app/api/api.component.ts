@@ -39,6 +39,10 @@ export class ApiComponent {
     return this.baseUrl + "/task/getAvailable";
   }
 
+  assignTaskToUser(): string {
+    return this.baseUrl + "/task/user/assign";
+  }
+
   createTask(): string {
     return this.baseUrl + "/task/create";
   }

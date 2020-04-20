@@ -1,0 +1,49 @@
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+  width: 80%;
+  height: 180px;
+  border-radius: 40px;
+  background-color: whitesmoke;
+  .text-container {
+    float: left;
+    width: 60%;
+    height: 100%;
+    .inner-text-container {
+      margin-left: 30px;
+      h2 {
+        margin-top: 20px;
+      }
+      p {
+        font-size: 12px;
+        max-height: 85px;
+        overflow-y: hidden;
+      }
+    }
+  }
+  .button-container {
+    float: right;
+    width: 40%;
+    height: 100%;
+    .inner-button-container {
+      width: 200px;
+      margin: auto;
+      button {
+        color: white;
+        font-size: 16px;
+        margin-top: 25px;
+        border-radius: 15px;
+        height: 50px;
+        width: 100%;
+      }
+    }
+
+    .primary-button {
+      background-color: rgb(55, 180, 55);
+    }
+    .notify-button {
+      background-color: #376dbd;
+    }
+  }
+}

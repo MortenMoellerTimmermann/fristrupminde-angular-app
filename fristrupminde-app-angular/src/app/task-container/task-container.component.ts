@@ -51,7 +51,7 @@ export class TaskContainerComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.taskService.getUserTasks().subscribe(
         (data) => (this.tasks = data),
-        (error) => (this.tasks = Array<ITask>())
+        (error) => (this.tasks = new Array<ITask>())
       )
     );
   }
@@ -60,11 +60,17 @@ export class TaskContainerComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.taskService.getAvailableTasks().subscribe(
         (data) => (this.availableTasks = data),
-        (error) => (this.availableTasks = Array<ITask>())
+        (error) => (this.availableTasks = new Array<ITask>())
       )
     );
   }
 
+  assignTaskToUser(itask: ITask): void {
+    //TODO remove task from availble list
+
+    this.tasks.push(itask);
+    this.notifyCalenderObservable.next(itask);
+  }
   addNewTask(itask: ITask): void {
     if (itask.assignedTo === this.auth.getUserEmail()) {
       this.tasks.push(itask);

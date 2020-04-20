@@ -20,7 +20,11 @@ export class HeaderInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     let jsonReq: HttpRequest<any> = request.clone({
-      setHeaders: { Authorization: this.auth.getToken(), observe: "response" },
+      setHeaders: {
+        Authorization: this.auth.getToken(),
+        observe: "response",
+        "Content-Type": "application/json",
+      },
     });
 
     return next.handle(jsonReq);

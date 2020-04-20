@@ -211,12 +211,14 @@ export class CalenderComponent implements OnInit, OnDestroy {
 
   getAmountOfTasksForDate(date: Date, taskArray: Array<ITask>): Array<ITask> {
     var temp: Array<ITask> = new Array();
-    taskArray.forEach((task) => {
-      let taskDate: Date = new Date(task.dueDate);
-      if (date.isSameDateAs(taskDate)) {
-        temp.push(task);
-      }
-    });
+    if (taskArray) {
+      taskArray.forEach((task) => {
+        let taskDate: Date = new Date(task.dueDate);
+        if (date.isSameDateAs(taskDate)) {
+          temp.push(task);
+        }
+      });
+    }
     return temp;
   }
 
