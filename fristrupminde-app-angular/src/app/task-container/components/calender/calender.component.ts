@@ -9,6 +9,7 @@ import {
 import CalenderDate from "../../models/calenderDate";
 import { Subject, VirtualTimeScheduler } from "rxjs";
 import ITask from "../../interfaces/ITask";
+import INotifyCalender from "../../interfaces/INotifyCalender";
 
 @Component({
   selector: "app-calender",
@@ -18,7 +19,7 @@ import ITask from "../../interfaces/ITask";
 export class CalenderComponent implements OnInit, OnDestroy {
   @Input() tasks: Array<ITask>;
   @Input() availableTasks: Array<ITask>;
-  @Input() newTaskSubscription: Subject<ITask>;
+  @Input() newTaskSubscription: Subject<INotifyCalender>;
   @Output() onSelectDateEvent: EventEmitter<CalenderDate> = new EventEmitter();
   selectedDate: CalenderDate;
   weeks: Array<Array<CalenderDate>>;
@@ -37,8 +38,8 @@ export class CalenderComponent implements OnInit, OnDestroy {
     this.setupDates();
     this.onSelectDateEvent.emit(this.selectedDate);
 
-    this.newTaskSubscription.subscribe((newTask) => {
-      this.addNewTaskToCalender(newTask);
+    this.newTaskSubscription.subscribe((notifier) => {
+      this.updateCalender(notifier);
     });
   }
 
@@ -60,8 +61,7 @@ export class CalenderComponent implements OnInit, OnDestroy {
     this.selectedDate = new CalenderDate(
       new Date(),
       false,
-      this.getAmountOfTasksForDate(new Date(), this.tasks),
-      this.getAmountOfTasksForDate(new Date(), this.availableTasks)
+      this.getAmountOfTasksForDate(new Date(), this.tasks)
     );
     this.getDatesForMonth(currentDay);
   }
@@ -85,8 +85,7 @@ export class CalenderComponent implements OnInit, OnDestroy {
         new CalenderDate(
           tempDatesArray[i],
           true,
-          this.getAmountOfTasksForDate(tempDatesArray[i], this.tasks),
-          this.getAmountOfTasksForDate(tempDatesArray[i], this.availableTasks)
+          this.getAmountOfTasksForDate(tempDatesArray[i], this.tasks)
         )
       );
     }
@@ -100,8 +99,7 @@ export class CalenderComponent implements OnInit, OnDestroy {
         new CalenderDate(
           dateToAdd,
           true,
-          this.getAmountOfTasksForDate(dateToAdd, this.tasks),
-          this.getAmountOfTasksForDate(dateToAdd, this.availableTasks)
+          this.getAmountOfTasksForDate(dateToAdd, this.tasks)
         )
       );
     }
@@ -128,8 +126,7 @@ export class CalenderComponent implements OnInit, OnDestroy {
         new CalenderDate(
           dateToAdd,
           false,
-          this.getAmountOfTasksForDate(dateToAdd, this.tasks),
-          this.getAmountOfTasksForDate(dateToAdd, this.availableTasks)
+          this.getAmountOfTasksForDate(dateToAdd, this.tasks)
         )
       );
       if (currentDay.getDay() == 0) {
@@ -209,29 +206,24 @@ export class CalenderComponent implements OnInit, OnDestroy {
     }
   }
 
-  getAmountOfTasksForDate(date: Date, taskArray: Array<ITask>): Array<ITask> {
-    var temp: Array<ITask> = new Array();
+  getAmountOfTasksForDate(date: Date, taskArray: Array<ITask>): number {
+    var temp: number = 0;
     if (taskArray) {
       taskArray.forEach((task) => {
         let taskDate: Date = new Date(task.dueDate);
         if (date.isSameDateAs(taskDate)) {
-          temp.push(task);
+          temp += 1;
         }
       });
     }
     return temp;
   }
 
-  addNewTaskToCalender(itask: ITask): void {
+  updateCalender(notify: INotifyCalender): void {
     this.weeks.forEach((weeks) => {
       weeks.forEach((day) => {
-        if (day.date.isSameDateAs(itask.dueDate)) {
-          day.addNewTask(itask);
-          //Updates the view
-          if (day.date.isSameDateAs(this.selectedDate.date)) {
-            this.selectedDate = day;
-          }
-          this.onSelectDateEvent.emit(this.selectedDate);
+        if (day.date.isSameDateAs(notify.date)) {
+          day.updateAmountOfTasks(notify.value);
         }
       });
     });

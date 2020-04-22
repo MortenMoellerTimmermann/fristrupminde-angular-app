@@ -47,6 +47,7 @@ export class AvailableTasksComponent implements OnInit, OnDestroy {
     let assignTask = <IAssignTask>{};
     assignTask.taskID = task.id;
     this.taskService.assignTaskToUser(assignTask).subscribe((succes) => {
+      console.log("succes");
       this.onTakeTask.emit(task);
       (err) => {};
     });

@@ -1,56 +1,37 @@
-import ITask from "../interfaces/ITask";
-
 export default class CalenderDate {
   date: Date;
   otherMonth: Boolean;
-  tasksForDate: Array<ITask>;
-  availableTasksForDate: Array<ITask>;
+  amountOfTasksForDate: number;
 
-  constructor(
-    date: Date,
-    otherMonth: Boolean,
-    tasksForDate: Array<ITask>,
-    availableTasksForDate: Array<ITask>
-  ) {
+  constructor(date: Date, otherMonth: Boolean, amountOfTasksForDate: number) {
     this.date = date;
     this.otherMonth = otherMonth;
-    this.tasksForDate = tasksForDate;
-    this.availableTasksForDate = availableTasksForDate;
+    this.amountOfTasksForDate = amountOfTasksForDate;
   }
 
   getDate(): string {
     return this.date.getDate().toString();
   }
 
-  addNewTask(itask: ITask): void {
-    this.tasksForDate.push(itask);
-  }
-
   getDateObject(): Date {
     return this.date;
   }
 
+  updateAmountOfTasks(value: number): void {
+    this.amountOfTasksForDate += value;
+  }
+
   getAmountOfTasks(): number {
-    return this.tasksForDate.length;
-  }
-
-  getTasks(): Array<ITask> {
-    return this.tasksForDate;
-  }
-
-  getAvailableTasks(): Array<ITask> {
-    return this.availableTasksForDate;
+    return this.amountOfTasksForDate;
   }
 
   writeAmountOfTasksDots(): string {
-    let index: number = 0;
     let output: string = "";
-    this.tasksForDate.forEach((task) => {
-      if (index < 3) {
+    for (let i = 0; i < this.amountOfTasksForDate; i++) {
+      if (i < 3) {
         output += " . ";
       }
-      index += 1;
-    });
+    }
     return output;
   }
 }
