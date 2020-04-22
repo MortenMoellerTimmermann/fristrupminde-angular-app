@@ -83,6 +83,10 @@ export class TaskContainerComponent implements OnInit, OnDestroy {
       }
     });
     this.tasks.push(itask);
+    let notifyObj = <INotifyCalender>{};
+    notifyObj.date = itask.dueDate;
+    notifyObj.value = 1;
+    this.newTaskNotifier.next(notifyObj);
     this.updateTaskView(this.selectedDateCalender);
   }
 
