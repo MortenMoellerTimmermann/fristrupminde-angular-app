@@ -15,8 +15,7 @@ import { AuthComponent } from "../authentication/auth";
 export class TaskContainerComponent implements OnInit, OnDestroy {
   currentPath: taskPaths;
   taskPaths = taskPaths;
-  selectedDate: Date;
-  selectedDateCalender: CalenderDate;
+  selectedDate: Date = new Date();
   tasks: Array<ITask>;
   availableTasks: Array<ITask>;
   subscriptions: Array<any> = new Array<any>();
@@ -87,7 +86,7 @@ export class TaskContainerComponent implements OnInit, OnDestroy {
     notifyObj.date = itask.dueDate;
     notifyObj.value = 1;
     this.newTaskNotifier.next(notifyObj);
-    this.updateTaskView(this.selectedDateCalender);
+    this.updateTaskView(this.selectedDate);
   }
 
   addNewTask(itask: ITask): void {
@@ -101,21 +100,17 @@ export class TaskContainerComponent implements OnInit, OnDestroy {
       this.availableTasks.push(itask);
     }
     //
-    this.updateTaskView(this.selectedDateCalender);
+    this.updateTaskView(this.selectedDate);
   }
 
-  updateTaskView(date: CalenderDate) {
+  updateTaskView(date: Date) {
     //Finds the tasks for the selected date.
-    this.currentDateTasks = this.getTaskForDateFromList(
-      this.tasks,
-      date.getDateObject()
-    );
+    this.currentDateTasks = this.getTaskForDateFromList(this.tasks, date);
     this.currentDateAvailableTasks = this.getTaskForDateFromList(
       this.availableTasks,
-      date.getDateObject()
+      date
     );
-    this.selectedDate = date.getDateObject();
-    this.selectedDateCalender = date;
+    this.selectedDate = date;
   }
 
   changeRoute(path: taskPaths) {

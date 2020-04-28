@@ -2,12 +2,10 @@
   display: inline-block;
   border-right: solid 1px #e0e0e0;
   width: 30%;
-  height: calc(100vh - 80px);
 }
 .tasks-presenter-container {
   width: calc(70% - 1px);
   float: right;
-  height: calc(100vh - 80px);
   .tasks-container {
     float: right;
     width: 100%;

@@ -7,7 +7,7 @@ import {
   OnDestroy,
 } from "@angular/core";
 import CalenderDate from "../../models/calenderDate";
-import { Subject, VirtualTimeScheduler } from "rxjs";
+import { Subject } from "rxjs";
 import ITask from "../../interfaces/ITask";
 import INotifyCalender from "../../interfaces/INotifyCalender";
 
@@ -20,7 +20,7 @@ export class CalenderComponent implements OnInit, OnDestroy {
   @Input() tasks: Array<ITask>;
   @Input() availableTasks: Array<ITask>;
   @Input() newTaskSubscription: Subject<INotifyCalender>;
-  @Output() onSelectDateEvent: EventEmitter<CalenderDate> = new EventEmitter();
+  @Output() onSelectDateEvent: EventEmitter<Date> = new EventEmitter();
   selectedDate: CalenderDate;
   weeks: Array<Array<CalenderDate>>;
   weeksDates: Array<CalenderDate>;
@@ -36,7 +36,7 @@ export class CalenderComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.setupMonthString();
     this.setupDates();
-    this.onSelectDateEvent.emit(this.selectedDate);
+    this.onSelectDateEvent.emit(this.selectedDate.getDateObject());
 
     this.newTaskSubscription.subscribe((notifier) => {
       this.updateCalender(notifier);
@@ -173,7 +173,7 @@ export class CalenderComponent implements OnInit, OnDestroy {
     } else {
       this.selectedDate = selectedDate;
     }
-    this.onSelectDateEvent.emit(this.selectedDate);
+    this.onSelectDateEvent.emit(this.selectedDate.getDateObject());
   }
 
   findOtherMonthSelectedDate(selectedDate: CalenderDate): CalenderDate {

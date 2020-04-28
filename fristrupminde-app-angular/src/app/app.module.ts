@@ -17,6 +17,7 @@ import { AuthenticationInterceptor } from "./core/authentication-interceptor/aut
 import { AuthenticationModule } from "./authentication/authentication.module";
 import { TaskContainerModule } from "./task-container/task-container.module";
 import { SharedModule } from "src/shared/shared.module";
+import { HeaderComponent } from './core/header/header.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { SharedModule } from "src/shared/shared.module";
     HomeComponent,
     NavbarComponent,
     RemarksContainerComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
