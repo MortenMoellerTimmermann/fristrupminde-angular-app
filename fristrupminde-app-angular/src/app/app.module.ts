@@ -16,8 +16,9 @@ import { HeaderInterceptor } from "./core/header-interceptor/header-interceptor.
 import { AuthenticationInterceptor } from "./core/authentication-interceptor/authentication.interceptor";
 import { AuthenticationModule } from "./authentication/authentication.module";
 import { TaskContainerModule } from "./task-container/task-container.module";
-import { SharedModule } from "src/shared/shared.module";
-import { HeaderComponent } from './core/header/header.component';
+import { SharedModule } from "src/app/shared/shared.module";
+import { HeaderComponent } from "./core/header/header.component";
+import { WidgetComponent } from "./shared/widget/widget.component";
 
 @NgModule({
   declarations: [

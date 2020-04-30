@@ -1,63 +1,97 @@
-<div>
-  <div class="calender-container">
-    <app-calender
-      *ngIf="tasks"
-      [tasks]="tasks"
-      [availableTasks]="availableTasks"
-      [newTaskSubscription]="newTaskNotifier"
-      (onSelectDateEvent)="updateTaskView($event)"
-    >
-    </app-calender>
-  </div>
-  <div class="tasks-presenter-container">
-    <div class="tasks-container">
-      <div class="tasks-header">
-        <div class="links">
-          <a
-            routerLink="your-tasks"
-            (click)="changeRoute(taskPaths.your_tasks)"
-            [ngClass]="{
-              'selected-path': currentPath === taskPaths.your_tasks
-            }"
+<!-- Read this for widgets https://stackoverflow.com/questions/47115902/div-wont-fill-the-empty-space-->
+
+<div class="container">
+  <app-widget
+    class="calender-widget-container"
+    [ngStyle]="{
+      order: '1'
+    }"
+  >
+    <div content class="calender-widget">
+      <app-calender
+        *ngIf="tasks"
+        [tasks]="tasks"
+        [availableTasks]="availableTasks"
+        [newTaskSubscription]="newTaskNotifier"
+        (onSelectDateEvent)="updateTaskView($event)"
+      >
+      </app-calender>
+    </div>
+  </app-widget>
+
+  <app-widget
+    class="task-widget-container"
+    [ngStyle]="{
+      order: '2'
+    }"
+  >
+    <div content class="task-widget">
+      <div class="tasks-container">
+        <div class="tasks-header">
+          <div class="links">
+            <a
+              routerLink="your-tasks"
+              (click)="changeRoute(taskPaths.your_tasks)"
+              [ngClass]="{
+                'selected-path': currentPath === taskPaths.your_tasks
+              }"
+            >
+              Dine opgaver
+            </a>
+            <a
+              routerLink="available-tasks"
+              (click)="changeRoute(taskPaths.available_tasks)"
+              [ngClass]="{
+                'selected-path': currentPath === taskPaths.available_tasks
+              }"
+            >
+              Ledige opgaver
+            </a>
+            <a (click)="openCreateTaskModal()">
+              Opret opgave
+            </a>
+          </div>
+        </div>
+        <div class="tasks-inner-container">
+          <app-your-tasks
+            *ngIf="currentPath === taskPaths.your_tasks"
+            [date]="selectedDate"
+            [tasks]="currentDateTasks"
           >
-            Dine opgaver
-          </a>
-          <a
-            routerLink="available-tasks"
-            (click)="changeRoute(taskPaths.available_tasks)"
-            [ngClass]="{
-              'selected-path': currentPath === taskPaths.available_tasks
-            }"
+          </app-your-tasks>
+          <app-available-tasks
+            *ngIf="currentPath === taskPaths.available_tasks"
+            [date]="selectedDate"
+            [availableTasks]="currentDateAvailableTasks"
+            (onTakeTask)="assignTaskToUser($event)"
           >
-            Ledige opgaver
-          </a>
-          <a (click)="openCreateTaskModal()">
-            Opret opgave
-          </a>
+          </app-available-tasks>
         </div>
       </div>
-      <div class="tasks-inner-container">
-        <app-your-tasks
-          *ngIf="currentPath === taskPaths.your_tasks"
-          [date]="selectedDate"
-          [tasks]="currentDateTasks"
-        >
-        </app-your-tasks>
-        <app-available-tasks
-          *ngIf="currentPath === taskPaths.available_tasks"
-          [date]="selectedDate"
-          [availableTasks]="currentDateAvailableTasks"
-          (onTakeTask)="assignTaskToUser($event)"
-        >
-        </app-available-tasks>
-      </div>
     </div>
-  </div>
-</div>
+  </app-widget>
 
-<app-create-task-modal
-  [openModal]="openModal"
-  (onAddTask)="addNewTask($event)"
-  (onCloseModalEvent)="onCloseModal($event)"
->
-</app-create-task-modal>
+  <app-widget
+    class="calender-widget-container"
+    [ngStyle]="{
+      order: '3'
+    }"
+  >
+    <div content class="calender-widget">
+      <app-calender
+        *ngIf="tasks"
+        [tasks]="tasks"
+        [availableTasks]="availableTasks"
+        [newTaskSubscription]="newTaskNotifier"
+        (onSelectDateEvent)="updateTaskView($event)"
+      >
+      </app-calender>
+    </div>
+  </app-widget>
+  <app-create-task-modal
+    [openModal]="openModal"
+    (onAddTask)="addNewTask($event)"
+    (onCloseModalEvent)="onCloseModal($event)"
+  >
+  </app-create-task-modal>
+</div>

@@ -6,9 +6,10 @@ import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from "@angular/material/core";
+import { WidgetComponent } from "./widget/widget.component";
 
 @NgModule({
-  declarations: [ModalComponent],
+  declarations: [ModalComponent, WidgetComponent],
   imports: [
     CommonModule,
     MatAutocompleteModule,
@@ -19,6 +20,7 @@ import { MatNativeDateModule } from "@angular/material/core";
   ],
   exports: [
     ModalComponent,
+    WidgetComponent,
     MatAutocompleteModule,
     MatInputModule,
     MatFormFieldModule,
