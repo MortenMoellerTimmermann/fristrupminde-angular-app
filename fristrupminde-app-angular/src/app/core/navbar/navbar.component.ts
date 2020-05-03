@@ -15,6 +15,8 @@ export class NavbarComponent implements OnInit {
       this.activeLink = "tasks";
     } else if (router.url.includes("remarks")) {
       this.activeLink = "remarks";
+    } else if (router.url.includes("statistics")) {
+      this.activeLink = "statistics";
     } else {
       this.activeLink = "home";
     }

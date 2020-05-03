@@ -4,6 +4,7 @@ import { AuthGuardService } from "./authentication/authguard";
 import { TaskContainerComponent } from "./task-container/task-container.component";
 import { RemarksContainerComponent } from "./remarks-container/remarks-container.component";
 import { HomeComponent } from "./home/home.component";
+import { StatisticsComponent } from "./statistics/statistics.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
@@ -12,6 +13,7 @@ const routes: Routes = [
     component: HomeComponent,
     canActivate: [AuthGuardService],
     children: [
+      { path: "statistics", component: StatisticsComponent },
       {
         path: "tasks",
         component: TaskContainerComponent,

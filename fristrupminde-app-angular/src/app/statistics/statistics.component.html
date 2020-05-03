@@ -1,0 +1,57 @@
+<div class="container">
+  <app-widget
+    class="widget-container"
+    [ngStyle]="{
+      order: '1'
+    }"
+  >
+    <div content class="widget">
+      <canvas
+        baseChart
+        [datasets]="lineChartData"
+        [labels]="lineChartLabels"
+        [options]="lineChartOptions"
+        [colors]="lineChartColors"
+        [legend]="lineChartLegend"
+        [chartType]="lineChartType"
+        [plugins]="lineChartPlugins"
+      >
+      </canvas>
+    </div>
+  </app-widget>
+  <app-widget
+    class="widget-container"
+    [ngStyle]="{
+      order: '1'
+    }"
+  >
+    <div content class="widget"></div
+  ></app-widget>
+  <app-widget
+    class="widget-large-container"
+    [ngStyle]="{
+      order: '1'
+    }"
+  >
+    <div content class="widget">
+      <canvas
+        baseChart
+        [datasets]="lineChartData"
+        [labels]="lineChartLabels"
+        [options]="lineChartOptions"
+        [colors]="lineChartColors"
+        [legend]="lineChartLegend"
+        [chartType]="lineChartType"
+        [plugins]="lineChartPlugins"
+      >
+      </canvas></div
+  ></app-widget>
+  <app-widget
+    class="widget-container"
+    [ngStyle]="{
+      order: '1'
+    }"
+  >
+    <div content class="widget"></div
+  ></app-widget>
+</div>

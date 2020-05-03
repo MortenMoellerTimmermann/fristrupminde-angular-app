@@ -8,6 +8,13 @@
   </div>
   <div
     class="link-element"
+    [ngClass]="{ active: activeLink === 'statistics' }"
+    (click)="clickLink('statistics')"
+  >
+    <a routerLink="statistics"> Statistik </a>
+  </div>
+  <div
+    class="link-element"
     [ngClass]="{ active: activeLink === 'tasks' }"
     (click)="clickLink('tasks')"
   >

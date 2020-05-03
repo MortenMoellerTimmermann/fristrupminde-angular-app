@@ -13,9 +13,10 @@
         <input
           id="password"
           class="self-input"
-          placeholder="Email"
+          placeholder="Password"
           type="password"
           formControlName="password"
+          (keyup)="authenticate(taskForm)"
         />
       </form>
     </div>

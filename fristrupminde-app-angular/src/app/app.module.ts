@@ -18,7 +18,7 @@ import { AuthenticationModule } from "./authentication/authentication.module";
 import { TaskContainerModule } from "./task-container/task-container.module";
 import { SharedModule } from "src/app/shared/shared.module";
 import { HeaderComponent } from "./core/header/header.component";
-import { WidgetComponent } from "./shared/widget/widget.component";
+import { StatisticsModule } from "./statistics/statistics.module";
 
 @NgModule({
   declarations: [
@@ -33,6 +33,7 @@ import { WidgetComponent } from "./shared/widget/widget.component";
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
+    StatisticsModule,
     AuthenticationModule,
     TaskContainerModule,
     HttpClientModule,
