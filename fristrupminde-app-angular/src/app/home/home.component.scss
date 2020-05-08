@@ -9,12 +9,12 @@
     .side-nav {
       order: 1;
       height: 100%;
-      width: 180px;
+      width: 100px;
     }
     .content-container {
       order: 2;
       border-radius: 20px 0px 0px 0px;
-      width: calc(100% - 180px);
+      width: calc(100% - 100px);
       overflow-y: scroll;
       height: 100%;
       background-color: #376dbd;

@@ -12,6 +12,8 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {}
 
   getUserEmail(): string {
-    return this.auth.getUserEmail();
+    return this.auth.getUserEmail() == ""
+      ? "Testuser username"
+      : this.auth.getUserEmail();
   }
 }

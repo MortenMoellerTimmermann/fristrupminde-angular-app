@@ -1,33 +1,23 @@
 <div class="navbar">
-  <div
-    class="link-element"
-    [ngClass]="{ active: activeLink === 'home' }"
-    (click)="clickLink('home')"
-  >
-    <a routerLink=""> Hjem </a>
+  <div class="link-element" [ngClass]="{ active: activeLink === 'home' }">
+    <a (click)="clickLink('home')" routerLink=""> <mat-icon>home</mat-icon> </a>
   </div>
-  <div
-    class="link-element"
-    [ngClass]="{ active: activeLink === 'statistics' }"
-    (click)="clickLink('statistics')"
-  >
-    <a routerLink="statistics"> Statistik </a>
+  <div class="link-element" [ngClass]="{ active: activeLink === 'statistics' }">
+    <a (click)="clickLink('statistics')" routerLink="statistics">
+      <mat-icon>bar_chart</mat-icon>
+    </a>
   </div>
-  <div
-    class="link-element"
-    [ngClass]="{ active: activeLink === 'tasks' }"
-    (click)="clickLink('tasks')"
-  >
-    <a routerLink="tasks"> Opgaver </a>
+  <div class="link-element" [ngClass]="{ active: activeLink === 'tasks' }">
+    <a (click)="clickLink('tasks')" routerLink="tasks">
+      <mat-icon>assignment</mat-icon>
+    </a>
   </div>
-  <div
-    class="link-element"
-    [ngClass]="{ active: activeLink === 'remarks' }"
-    (click)="clickLink('remarks')"
-  >
-    <a routerLink="remarks"> Bemærkninger </a>
+  <div class="link-element" [ngClass]="{ active: activeLink === 'remarks' }">
+    <a (click)="clickLink('remarks')" routerLink="remarks">
+      <mat-icon>notifications</mat-icon></a
+    >
   </div>
-  <div class="link-element" (click)="logout()">
-    <a> Log ud </a>
+  <div class="link-element">
+    <a (click)="logout()"> <mat-icon>keyboard_backspace</mat-icon> </a>
   </div>
 </div>
