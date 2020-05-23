@@ -22,6 +22,39 @@
   <app-widget
     class="task-widget-container"
     [ngStyle]="{
+      order: '1'
+    }"
+  >
+    <div content class="task-widget">
+      <app-your-tasks
+        [date]="selectedDate"
+        [tasks]="currentDateTasks"
+        (openModal)="openCreateTaskModal()"
+      >
+      </app-your-tasks>
+    </div>
+  </app-widget>
+
+  <app-widget
+    class="available-task-widget-container"
+    [ngStyle]="{
+      order: '1'
+    }"
+  >
+    <div content class="available-task-widget">
+      <app-available-tasks
+        [date]="selectedDate"
+        [availableTasks]="currentDateAvailableTasks"
+        (onTakeTask)="assignTaskToUser($event)"
+      >
+      </app-available-tasks>
+    </div>
+  </app-widget>
+
+  <!--
+  <app-widget
+    class="task-widget-container"
+    [ngStyle]="{
       order: '2'
     }"
   >
@@ -52,42 +85,12 @@
             </a>
           </div>
         </div>
-        <div class="tasks-inner-container">
-          <app-your-tasks
-            *ngIf="currentPath === taskPaths.your_tasks"
-            [date]="selectedDate"
-            [tasks]="currentDateTasks"
-          >
-          </app-your-tasks>
-          <app-available-tasks
-            *ngIf="currentPath === taskPaths.available_tasks"
-            [date]="selectedDate"
-            [availableTasks]="currentDateAvailableTasks"
-            (onTakeTask)="assignTaskToUser($event)"
-          >
-          </app-available-tasks>
-        </div>
+        <div class="tasks-inner-container"></div>
       </div>
     </div>
   </app-widget>
+  -->
 
-  <app-widget
-    class="calender-widget-container"
-    [ngStyle]="{
-      order: '3'
-    }"
-  >
-    <div content class="calender-widget">
-      <app-calender
-        *ngIf="tasks"
-        [tasks]="tasks"
-        [availableTasks]="availableTasks"
-        [newTaskSubscription]="newTaskNotifier"
-        (onSelectDateEvent)="updateTaskView($event)"
-      >
-      </app-calender>
-    </div>
-  </app-widget>
   <app-create-task-modal
     [openModal]="openModal"
     (onAddTask)="addNewTask($event)"

@@ -46,4 +46,8 @@ export class ApiComponent {
   createTask(): string {
     return this.baseUrl + "/task/create";
   }
+
+  sendStatisticsData(): string {
+    return this.baseUrl + "/statistics/create";
+  }
 }

@@ -1,0 +1,35 @@
+<div class="container">
+  <h1>Tilføj mælkeseddel</h1>
+  <div class="form-container">
+    <form [formGroup]="dataForm">
+      <div class="row">
+        <div>
+          <label for="milk">
+            Liter Mælk
+          </label>
+          <input
+            id="milk"
+            class="input-type"
+            type="number"
+            formControlName="milk"
+          />
+        </div>
+        <div>
+          <label for="fat">
+            Fedt %:
+          </label>
+          <input
+            id="fat"
+            class="input-type"
+            type="number"
+            formControlName="fat"
+          />
+        </div>
+      </div>
+      <div class="row"></div>
+    </form>
+  </div>
+  <div class="create-data-container" (click)="onSubmit(dataForm)">
+    <p>Tilføj data</p>
+  </div>
+</div>

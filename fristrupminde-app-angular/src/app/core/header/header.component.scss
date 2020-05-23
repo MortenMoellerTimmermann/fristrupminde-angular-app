@@ -17,6 +17,7 @@
 
   .user-container {
     float: right;
+    margin-top: 25px;
     margin-right: 30px;
     .user {
       float: left;
@@ -24,7 +25,7 @@
       padding-right: 0px;
       h3 {
         font-size: 18px;
-        margin-top: 30px;
+        margin-top: 10px;
         margin-bottom: 0;
         padding-right: 20px;
         color: white;
@@ -32,7 +33,6 @@
     }
     .user-logo {
       float: right;
-      margin-top: 20px;
       img {
         width: 50px;
         height: 50px;

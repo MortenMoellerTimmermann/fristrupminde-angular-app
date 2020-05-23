@@ -1,18 +1,28 @@
 .calender-widget-container {
-  width: 480px;
+  margin-right: 50px;
+  width: 530px;
   height: 500px;
   .calender-widget {
-    width: 450px;
+    width: 500px;
     height: 460px;
   }
 }
 
 .task-widget-container {
-  width: 750px;
+  width: 720px;
   height: 0px;
   .task-widget {
-    width: 700px;
-    height: 700px;
+    width: 680px;
+    min-height: 700px;
+  }
+}
+
+.available-task-widget-container {
+  width: 580px;
+  height: 0px;
+  .available-task-widget {
+    width: 550px;
+    min-height: 500px;
   }
 }
 

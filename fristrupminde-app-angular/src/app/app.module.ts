@@ -19,6 +19,7 @@ import { TaskContainerModule } from "./task-container/task-container.module";
 import { SharedModule } from "src/app/shared/shared.module";
 import { HeaderComponent } from "./core/header/header.component";
 import { StatisticsModule } from "./statistics/statistics.module";
+import { ChartsModule } from "ng2-charts";
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { StatisticsModule } from "./statistics/statistics.module";
     HeaderComponent,
   ],
   imports: [
+    ChartsModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,

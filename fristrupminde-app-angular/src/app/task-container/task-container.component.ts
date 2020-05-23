@@ -72,6 +72,11 @@ export class TaskContainerComponent implements OnInit, OnDestroy {
         tempList.push(task);
       }
     });
+    /* FOR DEMO 
+    for (let i = 0; i < 7; i++) {
+      let itask = <ITask>{};
+      tempList.push(itask);
+    } */
     return tempList;
   }
 

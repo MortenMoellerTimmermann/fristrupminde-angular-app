@@ -1,4 +1,12 @@
 <div class="tasks-inner-container">
-  <h2>{{ getDateString() }}</h2>
-  <app-task-object *ngFor="let task of tasks" [task]="task"> </app-task-object>
+  <div class="header">
+    <h2>{{ getDateString() }}</h2>
+    <h3 (click)="openCreateTaskModal()">
+      Opret opgave
+    </h3>
+  </div>
+  <div class="tasks">
+    <app-task-object *ngFor="let task of tasks" [task]="task">
+    </app-task-object>
+  </div>
 </div>

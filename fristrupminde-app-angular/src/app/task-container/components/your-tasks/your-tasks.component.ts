@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import ITask from "../../interfaces/ITask";
 import { iif } from "rxjs";
 
@@ -10,10 +10,15 @@ import { iif } from "rxjs";
 export class YourTasksComponent implements OnInit {
   @Input() date: Date;
   @Input() tasks: Array<ITask>;
+  @Output() openModal: EventEmitter<any> = new EventEmitter();
 
   constructor() {}
 
   ngOnInit() {}
+
+  openCreateTaskModal() {
+    this.openModal.emit();
+  }
 
   getDateString(): string {
     if (this.date !== undefined) {
