@@ -1,7 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { ChartDataSets, ChartOptions } from "chart.js";
 import { Color, Label } from "ng2-charts";
 import { StatisticsService } from "../services/statistics.service";
+import IStatisticsData from "../interfaces/IStatisticsData";
 
 @Component({
   selector: "app-data-graph",
@@ -9,6 +10,8 @@ import { StatisticsService } from "../services/statistics.service";
   styleUrls: ["./data-graph.component.scss"],
 })
 export class DataGraphComponent implements OnInit {
+  @Input() statisticsData: Array<IStatisticsData>;
+
   constructor(private statisticsSerivice: StatisticsService) {}
 
   ngOnInit(): void {}

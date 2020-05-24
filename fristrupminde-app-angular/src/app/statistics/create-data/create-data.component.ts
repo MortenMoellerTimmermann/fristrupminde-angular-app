@@ -1,14 +1,21 @@
-import { Component, OnInit } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  OnDestroy,
+} from "@angular/core";
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { StatisticsService } from "../services/statistics.service";
-import ICreateStatisticsData from "../interfaces/ICreateStatisticsData";
+import IStatisticsData from "../interfaces/IStatisticsData";
 
 @Component({
   selector: "app-create-data",
   templateUrl: "./create-data.component.html",
   styleUrls: ["./create-data.component.scss"],
 })
-export class CreateDataComponent implements OnInit {
+export class CreateDataComponent implements OnInit, OnDestroy {
+  @Output() onAddCreateData: EventEmitter<IStatisticsData> = new EventEmitter();
   dataForm: FormGroup;
   subscription: any;
 
@@ -17,21 +24,29 @@ export class CreateDataComponent implements OnInit {
     private statisticsSerivce: StatisticsService
   ) {
     this.dataForm = this.formBuilder.group({
-      milk: 0,
-      fat: 0,
+      date: Date,
+      milk: Number,
+      fat: Number,
     });
   }
 
   ngOnInit(): void {}
 
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
+
   onSubmit(dataForm: FormGroup): void {
-    let ICSD = <ICreateStatisticsData>{};
-    ICSD.milk = dataForm.controls["milk"].value;
+    let ISD = <IStatisticsData>{};
+    ISD.milk = dataForm.controls["milk"].value;
     this.subscription = this.statisticsSerivce
-      .sendStatisticsData(ICSD)
+      .sendStatisticsData(ISD)
       .subscribe(
         (data) => {
           dataForm.reset();
+          this.onAddCreateData.emit(ISD);
         },
         (error) => {
           console.log(error);

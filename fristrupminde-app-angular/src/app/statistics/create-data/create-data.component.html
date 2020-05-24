@@ -4,6 +4,23 @@
     <form [formGroup]="dataForm">
       <div class="row">
         <div>
+          <label for="date">
+            Dato:
+          </label>
+          <input
+            [matDatepicker]="picker"
+            id="date"
+            class="input-type date"
+            formControlName="date"
+          />
+          <mat-datepicker-toggle
+            class="datepicker-toggle"
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </div>
+        <div>
           <label for="milk">
             Liter Mælk
           </label>
@@ -14,6 +31,8 @@
             formControlName="milk"
           />
         </div>
+      </div>
+      <div class="row">
         <div>
           <label for="fat">
             Fedt %:
@@ -26,7 +45,6 @@
           />
         </div>
       </div>
-      <div class="row"></div>
     </form>
   </div>
   <div class="create-data-container" (click)="onSubmit(dataForm)">
