@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { ApiComponent } from "../../api/api.component";
 import { Observable } from "rxjs";
+import ICreateStatisticsData from "../interfaces/ICreateStatisticsData";
 import IStatisticsData from "../interfaces/IStatisticsData";
 
 @Injectable({
@@ -14,7 +15,10 @@ export class StatisticsService {
     return this.http.get<IStatisticsData>(this.api.getStatisticsData());
   }
 
-  sendStatisticsData(ICSD: IStatisticsData): Observable<any> {
-    return this.http.post<IStatisticsData>(this.api.sendStatisticsData(), ICSD);
+  sendStatisticsData(ISD: ICreateStatisticsData): Observable<any> {
+    return this.http.post<ICreateStatisticsData>(
+      this.api.sendStatisticsData(),
+      ISD
+    );
   }
 }

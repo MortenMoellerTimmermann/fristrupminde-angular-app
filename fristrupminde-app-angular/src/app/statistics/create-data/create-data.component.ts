@@ -7,7 +7,7 @@ import {
 } from "@angular/core";
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { StatisticsService } from "../services/statistics.service";
-import IStatisticsData from "../interfaces/IStatisticsData";
+import ICreateStatisticsData from "../interfaces/ICreateStatisticsData";
 
 @Component({
   selector: "app-create-data",
@@ -15,7 +15,9 @@ import IStatisticsData from "../interfaces/IStatisticsData";
   styleUrls: ["./create-data.component.scss"],
 })
 export class CreateDataComponent implements OnInit, OnDestroy {
-  @Output() onAddCreateData: EventEmitter<IStatisticsData> = new EventEmitter();
+  @Output() onAddCreateData: EventEmitter<
+    ICreateStatisticsData
+  > = new EventEmitter();
   dataForm: FormGroup;
   subscription: any;
 
@@ -24,9 +26,9 @@ export class CreateDataComponent implements OnInit, OnDestroy {
     private statisticsSerivce: StatisticsService
   ) {
     this.dataForm = this.formBuilder.group({
-      date: Date,
-      milk: Number,
-      fat: Number,
+      date: "",
+      milk: "",
+      fat: "",
     });
   }
 
@@ -39,13 +41,16 @@ export class CreateDataComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(dataForm: FormGroup): void {
-    let ISD = <IStatisticsData>{};
+    let ISD = <ICreateStatisticsData>{};
+    ISD.date = dataForm.controls["date"].value;
     ISD.milk = dataForm.controls["milk"].value;
+    ISD.fat = dataForm.controls["fat"].value;
     this.subscription = this.statisticsSerivce
       .sendStatisticsData(ISD)
       .subscribe(
-        (data) => {
+        (generatedID) => {
           dataForm.reset();
+          window.alert("Sended data to backend");
           this.onAddCreateData.emit(ISD);
         },
         (error) => {

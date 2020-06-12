@@ -1,40 +1,24 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import IStatisticsData from "./interfaces/IStatisticsData";
+import IStatisticsData from "./interfaces/ICreateStatisticsData";
 import { StatisticsService } from "./services/statistics.service";
+import { Subject } from "rxjs";
 
 @Component({
   selector: "app-statistics",
   templateUrl: "./statistics.component.html",
   styleUrls: ["./statistics.component.scss"],
 })
-export class StatisticsComponent implements OnInit, OnDestroy {
-  subscribtion: any;
+export class StatisticsComponent implements OnInit {
   statisticsData: Array<IStatisticsData>;
+  newDataNotifier: Subject<IStatisticsData> = new Subject();
 
-  constructor(private statisticsService: StatisticsService) {}
+  constructor() {}
 
-  ngOnInit(): void {
-    this.getStatisticsData();
-  }
+  ngOnInit(): void {}
 
-  ngOnDestroy(): void {
-    if (this.subscribtion) {
-      this.subscribtion.unsubscribe();
-    }
-  }
-
-  getStatisticsData(): void {
-    this.subscribtion = this.statisticsService.getStatisticsData().subscribe(
-      (data) => {
-        this.statisticsData = data;
-      },
-      (error) => {
-        this.statisticsData = new Array();
-      }
-    );
-  }
+  ngOnDestroy(): void {}
 
   addData(ISD: IStatisticsData): void {
-    this.statisticsData.push(ISD);
+    this.newDataNotifier.next(ISD);
   }
 }
