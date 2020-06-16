@@ -20,6 +20,7 @@ import { SharedModule } from "src/app/shared/shared.module";
 import { HeaderComponent } from "./core/header/header.component";
 import { StatisticsModule } from "./statistics/statistics.module";
 import { ChartsModule } from "ng2-charts";
+import { DatePipe } from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { ChartsModule } from "ng2-charts";
     BrowserAnimationsModule,
   ],
   providers: [
+    DatePipe,
     AuthGuardService,
     {
       provide: HTTP_INTERCEPTORS,

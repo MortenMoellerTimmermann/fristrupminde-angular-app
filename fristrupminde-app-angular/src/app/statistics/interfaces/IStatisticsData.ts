@@ -1,6 +1,6 @@
-export default interface ICreateStatisticsData {
-  ids: Array<string>;
-  date: Array<string>;
-  milk: Array<number>;
-  fat: Array<number>;
+export default interface IStatisticsData {
+  id: string;
+  dateForData: string;
+  milkLiter: number;
+  fatPercentage: number;
 }

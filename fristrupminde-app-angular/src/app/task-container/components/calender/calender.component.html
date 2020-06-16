@@ -1,13 +1,13 @@
 <div class="container">
   <div class="calender-container">
     <div class="calender-controls">
-      <h4 class="controls" (click)="getPreviousMonth()">
-        Forrige måned
-      </h4>
+      <div class="controls" (click)="getPreviousMonth()">
+        <h1><</h1>
+      </div>
       <h4 class="year">{{ displayedMonthString }} {{ displayedYearString }}</h4>
-      <h4 class="controls" (click)="getNextMonth()">
-        Næste måned
-      </h4>
+      <div class="controls" (click)="getNextMonth()">
+        <h1>></h1>
+      </div>
     </div>
     <div class="calender-header">
       <p>M</p>
