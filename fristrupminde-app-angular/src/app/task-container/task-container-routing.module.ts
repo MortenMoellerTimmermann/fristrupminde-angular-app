@@ -8,15 +8,7 @@ import { YourTasksComponent } from "./components/your-tasks/your-tasks.component
 import { TaskContainerComponent } from "./task-container.component";
 import { AvailableTaskObjectComponent } from "./components/available-task-object/available-task-object.component";
 
-const routes: Routes = [
-  {
-    path: "home/tasks",
-    redirectTo: "home/tasks/your-tasks",
-    pathMatch: "full",
-  },
-  { path: "your-tasks", component: YourTasksComponent },
-  { path: "available-tasks", component: AvailableTasksComponent },
-];
+const routes: Routes = [];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

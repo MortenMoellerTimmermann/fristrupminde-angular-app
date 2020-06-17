@@ -6,7 +6,11 @@
     </h3>
   </div>
   <div class="tasks">
-    <app-task-object *ngFor="let task of tasks" [task]="task">
+    <app-task-object
+      *ngFor="let task of tasks"
+      [task]="task"
+      (onFinishTask)="finishTask($event)"
+    >
     </app-task-object>
   </div>
 </div>

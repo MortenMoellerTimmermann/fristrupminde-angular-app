@@ -13,7 +13,7 @@
         [tasks]="tasks"
         [availableTasks]="availableTasks"
         [newTaskSubscription]="newTaskNotifier"
-        (onSelectDateEvent)="updateTaskView($event)"
+        (onSelectDateEvent)="updateTaskViewEvent($event)"
       >
       </app-calender>
     </div>
@@ -30,6 +30,7 @@
         [date]="selectedDate"
         [tasks]="currentDateTasks"
         (openModal)="openCreateTaskModal()"
+        (onFinishTaskSucceeded)="finishTask($event)"
       >
       </app-your-tasks>
     </div>

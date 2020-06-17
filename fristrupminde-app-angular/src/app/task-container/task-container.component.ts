@@ -1,11 +1,10 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
 import { Subject } from "rxjs";
 import { TaskService } from "./services/tasks/task.service";
 import ITask from "./interfaces/ITask";
 import INotifyCalender from "./interfaces/INotifyCalender";
-import CalenderDate from "./models/calenderDate";
 import { AuthComponent } from "../authentication/auth";
+import IFinishTask from "./interfaces/IFinishTask";
 
 @Component({
   selector: "app-task-container",
@@ -13,8 +12,6 @@ import { AuthComponent } from "../authentication/auth";
   styleUrls: ["./task-container.component.scss"],
 })
 export class TaskContainerComponent implements OnInit, OnDestroy {
-  currentPath: taskPaths;
-  taskPaths = taskPaths;
   selectedDate: Date = new Date();
   tasks: Array<ITask>;
   availableTasks: Array<ITask>;
@@ -24,17 +21,10 @@ export class TaskContainerComponent implements OnInit, OnDestroy {
   openModal: boolean = false;
   newTaskNotifier: Subject<INotifyCalender> = new Subject();
 
-  constructor(
-    router: Router,
-    private taskService: TaskService,
-    private auth: AuthComponent
-  ) {
-    if (router.url.includes("your-tasks")) {
-      this.currentPath = taskPaths.your_tasks;
-    } else if (router.url.includes("available-tasks")) {
-      this.currentPath = taskPaths.available_tasks;
-    }
-  }
+  taskReady: boolean = false;
+  availableTaskReady: boolean = false;
+
+  constructor(private taskService: TaskService, private auth: AuthComponent) {}
 
   ngOnInit() {
     this.getTasks();
@@ -50,7 +40,13 @@ export class TaskContainerComponent implements OnInit, OnDestroy {
   getTasks() {
     this.subscriptions.push(
       this.taskService.getUserTasks().subscribe(
-        (data) => (this.tasks = data),
+        (data) => {
+          this.tasks = data;
+          this.taskReady = true;
+          if (this.taskReady && this.availableTaskReady) {
+            this.updateTaskView();
+          }
+        },
         (error) => (this.tasks = new Array<ITask>())
       )
     );
@@ -59,7 +55,13 @@ export class TaskContainerComponent implements OnInit, OnDestroy {
   getAvailableTasks() {
     this.subscriptions.push(
       this.taskService.getAvailableTasks().subscribe(
-        (data) => (this.availableTasks = data),
+        (data) => {
+          this.availableTasks = data;
+          this.availableTaskReady = true;
+          if (this.taskReady && this.availableTaskReady) {
+            this.updateTaskView();
+          }
+        },
         (error) => (this.availableTasks = new Array<ITask>())
       )
     );
@@ -91,7 +93,7 @@ export class TaskContainerComponent implements OnInit, OnDestroy {
     notifyObj.date = itask.dueDate;
     notifyObj.value = 1;
     this.newTaskNotifier.next(notifyObj);
-    this.updateTaskView(this.selectedDate);
+    this.updateTaskView();
   }
 
   addNewTask(itask: ITask): void {
@@ -104,22 +106,33 @@ export class TaskContainerComponent implements OnInit, OnDestroy {
     } else if (itask.assignedTo === "" || itask.assignedTo === undefined) {
       this.availableTasks.push(itask);
     }
-    //
-    this.updateTaskView(this.selectedDate);
+    this.updateTaskView();
   }
 
-  updateTaskView(date: Date) {
+  updateTaskView() {
     //Finds the tasks for the selected date.
-    this.currentDateTasks = this.getTaskForDateFromList(this.tasks, date);
+    this.currentDateTasks = this.getTaskForDateFromList(
+      this.tasks,
+      this.selectedDate
+    );
     this.currentDateAvailableTasks = this.getTaskForDateFromList(
       this.availableTasks,
-      date
+      this.selectedDate
     );
-    this.selectedDate = date;
   }
 
-  changeRoute(path: taskPaths) {
-    this.currentPath = path;
+  finishTask(finishTask: IFinishTask): void {
+    this.tasks.forEach((task, index) => {
+      if (task.id === finishTask.taskID) {
+        this.tasks.splice(index, 1);
+        this.updateTaskView();
+      }
+    });
+  }
+
+  updateTaskViewEvent(date: Date) {
+    this.selectedDate = date;
+    this.updateTaskView();
   }
 
   openCreateTaskModal(): void {
@@ -129,9 +142,4 @@ export class TaskContainerComponent implements OnInit, OnDestroy {
   onCloseModal(): void {
     this.openModal = false;
   }
-}
-
-enum taskPaths {
-  your_tasks,
-  available_tasks,
 }

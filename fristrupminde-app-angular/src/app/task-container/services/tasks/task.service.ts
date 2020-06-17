@@ -6,6 +6,7 @@ import ICreateTask from "../../interfaces/ICreateTask";
 import { Observable, throwError } from "rxjs";
 import { retry, catchError } from "rxjs/operators";
 import IAssignTask from "../../interfaces/IAssignTask";
+import IFinishTask from "../../interfaces/IFinishTask";
 
 @Injectable({
   providedIn: "root",
@@ -40,6 +41,12 @@ export class TaskService {
   assignTaskToUser(assignTask: IAssignTask): Observable<any> {
     return this.http
       .post(this.api.assignTaskToUser(), assignTask)
+      .pipe(catchError(this.handleError));
+  }
+
+  finishTask(finishTask: IFinishTask): Observable<any> {
+    return this.http
+      .put(this.api.finishTask(), finishTask)
       .pipe(catchError(this.handleError));
   }
 

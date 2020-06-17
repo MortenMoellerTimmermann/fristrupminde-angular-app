@@ -1,22 +1,52 @@
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  OnDestroy,
+} from "@angular/core";
 import ITask from "../../interfaces/ITask";
 import { iif } from "rxjs";
+import { TaskService } from "../../services/tasks/task.service";
+import IFinishTask from "../../interfaces/IFinishTask";
 
 @Component({
   selector: "app-your-tasks",
   templateUrl: "./your-tasks.component.html",
   styleUrls: ["./your-tasks.component.scss"],
 })
-export class YourTasksComponent implements OnInit {
+export class YourTasksComponent implements OnInit, OnDestroy {
   @Input() date: Date;
   @Input() tasks: Array<ITask>;
   @Output() openModal: EventEmitter<any> = new EventEmitter();
+  @Output() onFinishTaskSucceeded: EventEmitter<
+    IFinishTask
+  > = new EventEmitter();
 
-  constructor() {}
+  subscription: any;
+
+  constructor(private taskService: TaskService) {}
 
   ngOnInit() {}
 
-  openCreateTaskModal() {
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
+
+  finishTask(finishTask: IFinishTask): void {
+    this.subscription = this.taskService.finishTask(finishTask).subscribe(
+      (data) => {
+        window.alert("Opgave fuldført");
+        this.onFinishTaskSucceeded.emit(finishTask);
+      },
+      (err) => {}
+    );
+  }
+
+  openCreateTaskModal(): void {
     this.openModal.emit();
   }
 

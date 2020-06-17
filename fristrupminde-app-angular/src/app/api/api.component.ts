@@ -47,6 +47,10 @@ export class ApiComponent {
     return this.baseUrl + "/task/create";
   }
 
+  finishTask(): string {
+    return this.baseUrl + "/task/finish";
+  }
+
   getStatisticsData(): string {
     return this.baseUrl + "/statistics/get";
   }

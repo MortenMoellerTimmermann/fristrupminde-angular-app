@@ -22,6 +22,7 @@ export class CreateTaskModalComponent implements OnInit, OnDestroy {
   @Output() onAddTask: EventEmitter<ITask> = new EventEmitter();
   taskForm: FormGroup;
   emails: Array<String>;
+  emailsToShow: Array<String>;
   subscriptions: Array<any> = new Array();
 
   constructor(
@@ -44,13 +45,23 @@ export class CreateTaskModalComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.forEach((sub) => {
-      if (sub) {
-      }
+      sub.unsubscribe();
     });
   }
 
   onCloseModal(): void {
     this.onCloseModalEvent.emit();
+  }
+
+  fillEmailsList(taskForm: FormGroup): void {
+    if (
+      taskForm.controls["assignedTo"].value &&
+      taskForm.controls["assignedTo"].value.length >= 2
+    ) {
+      this.emailsToShow = this.emails;
+    } else {
+      this.emailsToShow = null;
+    }
   }
 
   convertToITask(icreateTask: ICreateTask, generatedID: string): ITask {

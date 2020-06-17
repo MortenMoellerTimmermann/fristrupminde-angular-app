@@ -55,11 +55,12 @@
           id="assignedTo"
           class="input-type assignedTo"
           type="text"
+          (ngModelChange)="fillEmailsList(taskForm)"
           formControlName="assignedTo"
         />
 
         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-          <mat-option *ngFor="let email of emails" [value]="email">
+          <mat-option *ngFor="let email of emailsToShow" [value]="email">
             {{ email }}
           </mat-option>
         </mat-autocomplete>

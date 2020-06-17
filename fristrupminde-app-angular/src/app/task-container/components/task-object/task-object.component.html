@@ -8,8 +8,15 @@
     </div>
   </div>
   <div class="button-container">
+    <div class="sub-buttons">
+      <a>
+        <mat-icon>more_horiz</mat-icon>
+      </a>
+    </div>
     <div class="inner-button-container">
-      <button class="primary-button">Tag opgave</button>
+      <button class="primary-button" (click)="finishTask()">
+        Afslut opgave
+      </button>
       <button class="notify-button">Lav bemærkning</button>
     </div>
   </div>

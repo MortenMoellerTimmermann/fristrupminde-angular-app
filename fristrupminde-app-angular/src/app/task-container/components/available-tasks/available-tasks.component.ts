@@ -16,7 +16,6 @@ import IAssignTask from "../../interfaces/IAssignTask";
   templateUrl: "./available-tasks.component.html",
   styleUrls: ["./available-tasks.component.scss"],
 })
-//Extend??
 export class AvailableTasksComponent implements OnInit, OnDestroy {
   @Input() date: Date;
   @Input() availableTasks: Array<ITask>;
