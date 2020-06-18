@@ -3,6 +3,9 @@ export default interface ITask {
   description: string;
   title: string;
   created: Date;
+  createdBy: string;
   dueDate: Date;
   assignedTo?: string;
+  completedDate?: Date;
+  completedBy?: string;
 }

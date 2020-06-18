@@ -10,6 +10,8 @@ import IFinishTask from "../../interfaces/IFinishTask";
 export class TaskObjectComponent implements OnInit {
   @Input() task: ITask;
   @Output() onFinishTask: EventEmitter<IFinishTask> = new EventEmitter();
+  detailsModalOpen: boolean = false;
+
   constructor() {}
 
   ngOnInit() {}
@@ -18,5 +20,13 @@ export class TaskObjectComponent implements OnInit {
     let finishTaskObj = <IFinishTask>{};
     finishTaskObj.taskID = this.task.id;
     this.onFinishTask.emit(finishTaskObj);
+  }
+
+  openDetailsModal(): void {
+    this.detailsModalOpen = true;
+  }
+
+  closeDetailsModal(): void {
+    this.detailsModalOpen = false;
   }
 }

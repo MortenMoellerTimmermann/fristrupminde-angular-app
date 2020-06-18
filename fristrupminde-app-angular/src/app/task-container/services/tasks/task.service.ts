@@ -7,6 +7,8 @@ import { Observable, throwError } from "rxjs";
 import { retry, catchError } from "rxjs/operators";
 import IAssignTask from "../../interfaces/IAssignTask";
 import IFinishTask from "../../interfaces/IFinishTask";
+import IDetailsTask from "../../interfaces/IRemark";
+import IDetailsTaskOutput from "../../interfaces/IDetailsTaskOutput";
 
 @Injectable({
   providedIn: "root",
@@ -41,6 +43,12 @@ export class TaskService {
   assignTaskToUser(assignTask: IAssignTask): Observable<any> {
     return this.http
       .post(this.api.assignTaskToUser(), assignTask)
+      .pipe(catchError(this.handleError));
+  }
+
+  detailsTask(detailsTaskOutput: IDetailsTaskOutput): Observable<any> {
+    return this.http
+      .post<IDetailsTask>(this.api.detailsTask(), detailsTaskOutput)
       .pipe(catchError(this.handleError));
   }
 

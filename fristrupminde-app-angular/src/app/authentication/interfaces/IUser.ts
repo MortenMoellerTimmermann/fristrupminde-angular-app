@@ -1,5 +1,7 @@
 export default interface IUser {
+  username: string;
   email: string;
-  isAdmin: boolean;
-  isSystem: boolean;
+  avatar: string;
+  isAdmin?: boolean;
+  isSystem?: boolean;
 }

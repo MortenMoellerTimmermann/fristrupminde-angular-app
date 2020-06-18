@@ -1,0 +1,55 @@
+<app-modal
+  class="container"
+  [openModal]="openModal"
+  (onCloseModalEvent)="onCloseModal($event)"
+>
+  <div head class="header">
+    <h2>Detaljer for opgave "{{ task.title }}"</h2>
+  </div>
+  <div body class="body">
+    <div class="created-details">
+      <h3>Oprettet af:</h3>
+      <p>{{ task.createdBy }}</p>
+    </div>
+    <div class="time-details">
+      <div>
+        <h3>Oprettet den:</h3>
+        <p>{{ transformTimeFormat(task.created) }}</p>
+      </div>
+      <div>
+        <h3>Færdiggøres den:</h3>
+        <p>{{ transformTimeFormat(task.dueDate) }}</p>
+      </div>
+    </div>
+    <div
+      *ngIf="taskDetails && taskDetails.usersOnTask.length > 0"
+      class="participants-section"
+    >
+      <h3>Udføres af:</h3>
+      <div *ngFor="let user of taskDetails.usersOnTask">
+        <div class="participant-logo">
+          <img src="{{ user.avatar }}" />
+        </div>
+        <div class="participant-email">
+          <p>{{ user.email }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="description-section">
+      <h3>Beskrivelse:</h3>
+      <p>{{ task.description }}</p>
+    </div>
+    <div
+      *ngIf="taskDetails && taskDetails.remarks.length > 0"
+      class="remarks-section"
+    >
+      <h3>Bemærkninger:</h3>
+      <div *ngFor="let remark of taskDetails.remarks">
+        <div>
+          <p>{{ remark.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div footer class="footer"></div>
+</app-modal>
