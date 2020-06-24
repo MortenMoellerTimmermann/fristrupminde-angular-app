@@ -12,7 +12,6 @@ export class AuthGuardService implements CanActivate {
   ) {}
 
   canActivate(): boolean {
-    return true; //CHANGE
     if (this.auth.isLoggedIn()) {
       return true;
     } else {

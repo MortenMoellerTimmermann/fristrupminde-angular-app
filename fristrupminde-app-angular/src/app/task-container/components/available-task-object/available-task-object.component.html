@@ -1,4 +1,4 @@
-<div class="container" *ngIf="task" (click)="takeTask()">
+<div class="container" *ngIf="task">
   <div class="text-container">
     <div class="inner-text-container">
       <h2>{{ task.title }}</h2>
@@ -10,7 +10,6 @@
   <div class="button-container">
     <div class="inner-button-container">
       <button class="primary-button" (click)="takeTask()">Tag opgave</button>
-      <button class="notify-button">Lav bemærkning</button>
     </div>
   </div>
 </div>

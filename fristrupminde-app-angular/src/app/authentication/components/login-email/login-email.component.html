@@ -16,7 +16,7 @@
           placeholder="Password"
           type="password"
           formControlName="password"
-          (keyup)="authenticate(taskForm)"
+          (keyup.enter)="authenticate(taskForm)"
         />
       </form>
     </div>

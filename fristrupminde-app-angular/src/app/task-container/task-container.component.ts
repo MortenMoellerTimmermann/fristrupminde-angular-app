@@ -69,11 +69,13 @@ export class TaskContainerComponent implements OnInit, OnDestroy {
 
   getTaskForDateFromList(list: Array<ITask>, date: Date): Array<ITask> {
     let tempList = new Array<ITask>();
-    list.forEach((task) => {
-      if (date.isSameDateAs(new Date(task.dueDate))) {
-        tempList.push(task);
-      }
-    });
+    if (list) {
+      list.forEach((task) => {
+        if (date.isSameDateAs(new Date(task.dueDate))) {
+          tempList.push(task);
+        }
+      });
+    }
     /* FOR DEMO 
     for (let i = 0; i < 7; i++) {
       let itask = <ITask>{};
