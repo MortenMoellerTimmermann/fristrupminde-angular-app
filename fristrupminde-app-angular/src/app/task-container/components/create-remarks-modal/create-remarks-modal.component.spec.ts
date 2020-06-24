@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RemarksContainerComponent } from './remarks-container.component';
+import { CreateRemarksModalComponent } from './create-remarks-modal.component';
 
-describe('RemarksContainerComponent', () => {
-  let component: RemarksContainerComponent;
-  let fixture: ComponentFixture<RemarksContainerComponent>;
+describe('CreateRemarksModalComponent', () => {
+  let component: CreateRemarksModalComponent;
+  let fixture: ComponentFixture<CreateRemarksModalComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RemarksContainerComponent ]
+      declarations: [ CreateRemarksModalComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RemarksContainerComponent);
+    fixture = TestBed.createComponent(CreateRemarksModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

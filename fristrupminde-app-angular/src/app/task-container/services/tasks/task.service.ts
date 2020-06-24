@@ -9,6 +9,7 @@ import IAssignTask from "../../interfaces/IAssignTask";
 import IFinishTask from "../../interfaces/IFinishTask";
 import IDetailsTask from "../../interfaces/IRemark";
 import IDetailsTaskOutput from "../../interfaces/IDetailsTaskOutput";
+import ICreateRemark from "../../interfaces/ICreateRemark";
 
 @Injectable({
   providedIn: "root",
@@ -61,6 +62,12 @@ export class TaskService {
   getUserEmails(): Observable<String[]> {
     return this.http
       .get<String[]>(this.api.getUserEmails())
+      .pipe(catchError(this.handleError));
+  }
+
+  createRemark(createRemark: ICreateRemark): Observable<any> {
+    return this.http
+      .post(this.api.createRemark(), createRemark)
       .pipe(catchError(this.handleError));
   }
 

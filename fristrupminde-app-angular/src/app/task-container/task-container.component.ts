@@ -121,9 +121,13 @@ export class TaskContainerComponent implements OnInit, OnDestroy {
     );
   }
 
-  finishTask(finishTask: IFinishTask): void {
+  finishTask(iTask: ITask): void {
     this.tasks.forEach((task, index) => {
-      if (task.id === finishTask.taskID) {
+      if (task.id === iTask.id) {
+        let notifyObj = <INotifyCalender>{};
+        notifyObj.date = iTask.dueDate;
+        notifyObj.value = -1;
+        this.newTaskNotifier.next(notifyObj);
         this.tasks.splice(index, 1);
         this.updateTaskView();
       }

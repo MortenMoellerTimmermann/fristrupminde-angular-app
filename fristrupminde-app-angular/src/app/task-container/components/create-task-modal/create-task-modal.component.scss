@@ -41,19 +41,23 @@
     }
   }
   .footer {
-    h2 {
+    button {
+      width: 100%;
       margin: 0px;
       padding: 10px;
       color: white;
       font-size: 18px;
-      text-align: center;
       font-weight: bold;
+      background-color: #376dbd;
       &:hover {
         cursor: pointer;
       }
       &:active {
         color: #eee;
         font-weight: 300;
+      }
+      &:disabled {
+        background-color: #666;
       }
     }
   }

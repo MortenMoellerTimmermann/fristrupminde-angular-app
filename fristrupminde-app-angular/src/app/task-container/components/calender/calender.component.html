@@ -24,10 +24,10 @@
           *ngFor="let date of week; let i = index"
           (click)="selectDate(date)"
           [className]="
-            checkIfSameDate(date)
-              ? 'selected-date'
-              : checkIfToday(date)
+            checkIfToday(date)
               ? 'today-date'
+              : checkIfSameDate(date)
+              ? 'selected-date'
               : date.otherMonth
               ? 'other-month'
               : 'current-month'

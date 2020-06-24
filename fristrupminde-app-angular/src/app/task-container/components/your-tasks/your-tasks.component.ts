@@ -20,9 +20,7 @@ export class YourTasksComponent implements OnInit, OnDestroy {
   @Input() date: Date;
   @Input() tasks: Array<ITask>;
   @Output() openModal: EventEmitter<any> = new EventEmitter();
-  @Output() onFinishTaskSucceeded: EventEmitter<
-    IFinishTask
-  > = new EventEmitter();
+  @Output() onFinishTaskSucceeded: EventEmitter<ITask> = new EventEmitter();
 
   subscription: any;
 
@@ -36,11 +34,13 @@ export class YourTasksComponent implements OnInit, OnDestroy {
     }
   }
 
-  finishTask(finishTask: IFinishTask): void {
+  finishTask(iTask: ITask): void {
+    let finishTask = <IFinishTask>{};
+    finishTask.taskID = iTask.id;
     this.subscription = this.taskService.finishTask(finishTask).subscribe(
       (data) => {
         window.alert("Opgave fuldført");
-        this.onFinishTaskSucceeded.emit(finishTask);
+        this.onFinishTaskSucceeded.emit(iTask);
       },
       (err) => {}
     );

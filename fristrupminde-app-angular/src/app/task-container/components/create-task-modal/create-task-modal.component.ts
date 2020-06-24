@@ -5,6 +5,8 @@ import {
   Input,
   Output,
   EventEmitter,
+  OnChanges,
+  SimpleChanges,
 } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { TaskService } from "../../services/tasks/task.service";
@@ -16,7 +18,7 @@ import ITask from "src/app/task-container/interfaces/ITask";
   templateUrl: "./create-task-modal.component.html",
   styleUrls: ["./create-task-modal.component.scss"],
 })
-export class CreateTaskModalComponent implements OnInit, OnDestroy {
+export class CreateTaskModalComponent implements OnChanges, OnDestroy {
   @Input() openModal;
   @Output() onCloseModalEvent: EventEmitter<any> = new EventEmitter();
   @Output() onAddTask: EventEmitter<ITask> = new EventEmitter();
@@ -37,10 +39,14 @@ export class CreateTaskModalComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit(): void {
-    this.subscriptions.push(
-      this.taskService.getUserEmails().subscribe((data) => (this.emails = data))
-    );
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.openModal.currentValue) {
+      this.subscriptions.push(
+        this.taskService
+          .getUserEmails()
+          .subscribe((data) => (this.emails = data))
+      );
+    }
   }
 
   ngOnDestroy(): void {

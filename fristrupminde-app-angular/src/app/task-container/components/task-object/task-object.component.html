@@ -17,7 +17,9 @@
       <button class="primary-button" (click)="finishTask()">
         Afslut opgave
       </button>
-      <button class="notify-button">Lav bemærkning</button>
+      <button class="notify-button" (click)="openRemarksModal()">
+        Lav bemærkning
+      </button>
     </div>
   </div>
 </div>
@@ -28,3 +30,10 @@
   (onCloseModalEvent)="closeDetailsModal()"
 >
 </app-task-details-modal>
+
+<app-create-remarks-modal
+  [openModal]="remarksModalOpen"
+  [task]="task"
+  (onCloseModalEvent)="closeRemarksModal()"
+>
+</app-create-remarks-modal>

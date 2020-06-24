@@ -39,6 +39,7 @@ export class AuthComponent {
       const payload = JSON.parse(window.atob(payloadEncoded));
       this.user = {
         email: payload.email,
+        username: payload.uniqueName,
         isAdmin: payload.isAdmin === "True",
         isSystem: payload.isSystem === "True",
       };

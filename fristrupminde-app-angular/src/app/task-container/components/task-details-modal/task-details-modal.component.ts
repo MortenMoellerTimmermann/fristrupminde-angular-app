@@ -5,6 +5,8 @@ import {
   Output,
   EventEmitter,
   OnDestroy,
+  OnChanges,
+  SimpleChanges,
 } from "@angular/core";
 import { DatePipe } from "@angular/common";
 import ITask from "../../interfaces/ITask";
@@ -17,7 +19,7 @@ import IDetailsTask from "../../interfaces/IDetailsTask";
   templateUrl: "./task-details-modal.component.html",
   styleUrls: ["./task-details-modal.component.scss"],
 })
-export class TaskDetailsModalComponent implements OnInit, OnDestroy {
+export class TaskDetailsModalComponent implements OnChanges, OnDestroy {
   @Input() openModal: boolean;
   @Input() task: ITask;
   @Output() onCloseModalEvent: EventEmitter<any> = new EventEmitter();
@@ -27,8 +29,10 @@ export class TaskDetailsModalComponent implements OnInit, OnDestroy {
 
   constructor(private datepipe: DatePipe, private taskService: TaskService) {}
 
-  ngOnInit(): void {
-    this.getTaskDetails();
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.openModal.currentValue) {
+      this.getTaskDetails();
+    }
   }
 
   ngOnDestroy(): void {
@@ -52,9 +56,5 @@ export class TaskDetailsModalComponent implements OnInit, OnDestroy {
 
   onCloseModal(): void {
     this.onCloseModalEvent.emit();
-  }
-
-  transformTimeFormat(date: string): string {
-    return this.datepipe.transform(new Date(date), "dd MM yyyy");
   }
 }

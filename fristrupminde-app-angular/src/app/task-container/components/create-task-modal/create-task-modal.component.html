@@ -11,6 +11,7 @@
           Titel:
         </label>
         <input
+          required
           id="title"
           class="input-type title"
           type="text"
@@ -22,6 +23,7 @@
           Beskrivelse:
         </label>
         <textarea
+          required
           id="description"
           class="input-type description"
           type="text"
@@ -33,6 +35,7 @@
           Slut dato:
         </label>
         <input
+          required
           [matDatepicker]="picker"
           id="duedate"
           class="input-type duedate"
@@ -51,6 +54,7 @@
         </label>
         <input
           matInput
+          required
           [matAutocomplete]="auto"
           id="assignedTo"
           class="input-type assignedTo"
@@ -64,10 +68,14 @@
             {{ email }}
           </mat-option>
         </mat-autocomplete>
+
+        <app-user-container> </app-user-container>
       </div>
     </form>
   </div>
   <div footer class="footer">
-    <h2 (click)="onSubmit(taskForm)">Opret</h2>
+    <button (click)="onSubmit(taskForm)" [disabled]="!taskForm.valid">
+      Opret
+    </button>
   </div>
 </app-modal>

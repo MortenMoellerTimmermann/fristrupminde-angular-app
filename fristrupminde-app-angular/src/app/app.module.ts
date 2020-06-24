@@ -8,7 +8,6 @@ import { AppComponent } from "./app.component";
 
 import { HomeComponent } from "./home/home.component";
 import { NavbarComponent } from "./core/navbar/navbar.component";
-import { RemarksContainerComponent } from "./remarks-container/remarks-container.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import "./prototypes.ts";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -23,13 +22,7 @@ import { ChartsModule } from "ng2-charts";
 import { DatePipe } from "@angular/common";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    NavbarComponent,
-    RemarksContainerComponent,
-    HeaderComponent,
-  ],
+  declarations: [AppComponent, HomeComponent, NavbarComponent, HeaderComponent],
   imports: [
     ChartsModule,
     BrowserModule,

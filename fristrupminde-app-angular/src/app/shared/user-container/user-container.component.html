@@ -1,0 +1,8 @@
+<div class="participants-container" *ngIf="user">
+  <div class="participant-logo">
+    <img src="{{ user.avatar }}" />
+  </div>
+  <div class="participant-email">
+    <p>{{ user.email }}</p>
+  </div>
+</div>

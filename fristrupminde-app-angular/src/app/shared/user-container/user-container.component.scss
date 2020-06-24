@@ -1,0 +1,28 @@
+.participants-container {
+  margin: 10px 15px;
+  display: table;
+  text-align: center;
+  background-color: #e2e2e2;
+  border-radius: 20px;
+  .participant-logo {
+    padding: 10px;
+    display: table-cell;
+    vertical-align: middle;
+    width: 1%;
+    img {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+    }
+  }
+  .participant-email {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: left;
+    p {
+      margin-left: 5px;
+      margin-top: 5px;
+      font-size: 14px;
+    }
+  }
+}

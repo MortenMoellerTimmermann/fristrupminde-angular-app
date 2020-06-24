@@ -1,0 +1,22 @@
+<app-modal
+  class="container"
+  [openModal]="openModal"
+  (onCloseModalEvent)="onCloseModal($event)"
+>
+  <div head class="header">
+    <h2>Lav bemærkning for opgave: "{{ task.title }}"</h2>
+  </div>
+  <div body class="body">
+    <h3>Beskrivelse:</h3>
+    <textarea
+      class="input-type"
+      type="text"
+      [(ngModel)]="description"
+    ></textarea>
+  </div>
+  <div footer class="footer">
+    <button (click)="onSubmit()">
+      Send
+    </button>
+  </div>
+</app-modal>

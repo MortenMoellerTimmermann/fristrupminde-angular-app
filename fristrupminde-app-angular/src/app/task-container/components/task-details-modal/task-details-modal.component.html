@@ -14,11 +14,11 @@
     <div class="time-details">
       <div>
         <h3>Oprettet den:</h3>
-        <p>{{ transformTimeFormat(task.created) }}</p>
+        <p>{{ task.created | date }}</p>
       </div>
       <div>
         <h3>Færdiggøres den:</h3>
-        <p>{{ transformTimeFormat(task.dueDate) }}</p>
+        <p>{{ task.dueDate | date }}</p>
       </div>
     </div>
     <div
@@ -26,14 +26,11 @@
       class="participants-section"
     >
       <h3>Udføres af:</h3>
-      <div *ngFor="let user of taskDetails.usersOnTask">
-        <div class="participant-logo">
-          <img src="{{ user.avatar }}" />
-        </div>
-        <div class="participant-email">
-          <p>{{ user.email }}</p>
-        </div>
-      </div>
+      <app-user-container
+        *ngFor="let user of taskDetails.usersOnTask"
+        [user]="user"
+      >
+      </app-user-container>
     </div>
     <div class="description-section">
       <h3>Beskrivelse:</h3>
@@ -44,11 +41,11 @@
       class="remarks-section"
     >
       <h3>Bemærkninger:</h3>
-      <div *ngFor="let remark of taskDetails.remarks">
-        <div>
-          <p>{{ remark.description }}</p>
-        </div>
-      </div>
+      <app-remark-container
+        *ngFor="let remark of taskDetails.remarks"
+        [remark]="remark"
+      >
+      </app-remark-container>
     </div>
   </div>
   <div footer class="footer"></div>

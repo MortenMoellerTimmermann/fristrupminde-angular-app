@@ -11,6 +11,8 @@ export class ApiComponent {
     this.baseUrl = "https://localhost:5001/api";
   }
 
+  //Authentication Below
+
   login(): string {
     return this.baseUrl + "/user/login";
   }
@@ -26,6 +28,8 @@ export class ApiComponent {
   validateToken(): string {
     return this.baseUrl + "/user/validate";
   }
+
+  //Tasks Below
 
   getAllTasks(): string {
     return this.baseUrl + "/task/getAll";
@@ -54,6 +58,12 @@ export class ApiComponent {
   finishTask(): string {
     return this.baseUrl + "/task/finish";
   }
+
+  createRemark(): string {
+    return this.baseUrl + "/task/remark/create";
+  }
+
+  //Statistics Below
 
   getStatisticsData(): string {
     return this.baseUrl + "/statistics/get";

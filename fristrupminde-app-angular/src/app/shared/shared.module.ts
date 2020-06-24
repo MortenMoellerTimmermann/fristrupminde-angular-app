@@ -10,9 +10,10 @@ import { MatBadgeModule } from "@angular/material/badge";
 import { MatIconModule } from "@angular/material/icon";
 import { WidgetComponent } from "./widget/widget.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { UserContainerComponent } from "./user-container/user-container.component";
 
 @NgModule({
-  declarations: [ModalComponent, WidgetComponent],
+  declarations: [ModalComponent, WidgetComponent, UserContainerComponent],
   imports: [
     CommonModule,
     MatAutocompleteModule,
@@ -37,6 +38,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     MatBadgeModule,
     FormsModule,
     ReactiveFormsModule,
+    UserContainerComponent,
   ],
 })
 export class SharedModule {}

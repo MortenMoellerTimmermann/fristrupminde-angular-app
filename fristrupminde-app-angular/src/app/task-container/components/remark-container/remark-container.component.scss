@@ -1,0 +1,21 @@
+.remark-container {
+  margin: 10px 15px;
+  background-color: #e2e2e2;
+  border-radius: 20px;
+  .description {
+    p {
+      padding: 15px 15px;
+      font-size: 14px;
+    }
+  }
+  .remark-details {
+    p {
+      display: inline-block;
+      padding: 0px 15px;
+      font-size: 12px;
+      &:nth-child(2) {
+        float: right;
+      }
+    }
+  }
+}
